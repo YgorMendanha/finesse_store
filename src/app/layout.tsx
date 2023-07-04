@@ -1,9 +1,21 @@
-import { Geologica } from 'next/font/google'
+import { Geologica, Dosis } from 'next/font/google'
 import { ContextProvider } from '@/context'
 import { Layout } from '@/components/layout'
 
 import './globals.css'
-const inter = Geologica({ subsets: ['latin'] })
+
+const geo = Geologica({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-geologica',
+})
+ 
+const dos = Dosis({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-dosis',
+})
+ 
 
 export const metadata = {
   title: 'Create Next App',
@@ -13,7 +25,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
-      <body className={`${inter.className}`}>
+      <body className={`${geo.variable} ${dos.variable}`}>
         <ContextProvider>
           <Layout>{children}</Layout>
         </ContextProvider>

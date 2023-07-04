@@ -4,10 +4,11 @@ import React, { useId } from 'react'
 import { ImSpinner10 } from 'react-icons/im'
 
 interface PropsComponent {
-  label: string
-  icon: React.ReactNode
+  label?: string
+  icon?: React.ReactNode
   errorMessage?: string
   loading?: boolean
+  className?: string
 }
 
 interface PropsInput extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -22,13 +23,15 @@ export default function InputComponent({
   propsInput: PropsInput
 }) {
   const id = useId()
-  const { label, icon, errorMessage, loading } = propsComponent
+  const { label, icon, errorMessage, loading, className = '' } = propsComponent
 
   return (
     <div className="text-main_white dark:main_black my-3">
-      <label className="text-main_white dark:text-light" htmlFor={id}>
-        {label}
-      </label>
+      {label && (
+        <label className="text-main_white dark:text-light" htmlFor={id}>
+          {label}
+        </label>
+      )}
       <section className="flex items-center">
         <span className="text-xl pl-2 absolute">
           {loading ? <ImSpinner10 className="animate-spin" /> : icon}
@@ -39,7 +42,7 @@ export default function InputComponent({
           id={id}
           className={`pl-8 flex w-full items-center justify-center rounded-xl bg-dark p-2 outline-none border-2 ${
             errorMessage ? 'border-[#fdacac]' : 'border-[#cacaca]'
-          }`}
+          } ${className}`}
         />
       </section>
 
