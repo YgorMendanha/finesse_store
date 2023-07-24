@@ -8,11 +8,11 @@ export async function GET(request: Request) {
 
   const nameFile = searchParams.get('image')
 
-  const filePath = path.join(process.cwd(), `/public/images/${nameFile}`)
+  const filePath = path.join(process.cwd(), `/public/images/products/${nameFile}`)
   const imageBuffer = fs.createReadStream(filePath)
 
   // @ts-ignore: Return File in Api
   const response = new NextResponse(imageBuffer)
-  response.headers.set('content-type', 'image/png')
+  response.headers.set('content-type', 'image/jpg')
   return response
 }

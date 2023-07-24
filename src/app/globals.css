@@ -11,3 +11,18 @@ body {
   padding: 0px 20px;
   margin: 0 auto;
 }
+.splide__pagination__page {
+  &:hover {
+    background: #8284ed;
+  }
+}
+.splide__pagination__page.is-active {
+  background: #6366f1;
+}
+
+.splide__arrow svg {
+  fill: #6366f1;
+}
+.splide__arrow:hover:not(:disabled) svg {
+  fill: #8284ed;
+}

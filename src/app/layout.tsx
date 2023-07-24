@@ -3,6 +3,7 @@ import { ContextProvider } from '@/context'
 import { Layout } from '@/components/layout'
 
 import './globals.css'
+import '@splidejs/react-splide/css/skyblue';
 
 const geo = Geologica({
   subsets: ['latin'],
