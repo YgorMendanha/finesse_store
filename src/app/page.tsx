@@ -1,5 +1,6 @@
 import HomePage from '@/components/views/home'
 import { Product } from '@/server/products'
+import ShuffleProducts from '@/utils/functions/ShuffleProducts'
 
 async function getProducts() {
   try {
@@ -14,5 +15,8 @@ async function getProducts() {
 
 export default async function Home() {
   const product = await getProducts()
-  return <HomePage data={product} />
+
+  const promotionProduct = ShuffleProducts(product)
+
+  return <HomePage data={product} promotionProduct={promotionProduct} />
 }

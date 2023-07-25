@@ -1,11 +1,20 @@
 import { ProductInterface } from '@/types/products'
-import { Banner, BestProducts } from './components'
+import { Banner, PromotionProducts, ProductsSection } from './components'
+import { BannerCategories } from './components/bannerCategories'
 
-export default async function HomePage({ data }: { data: ProductInterface[] }) {
+export default function HomePage({
+  data,
+  promotionProduct
+}: {
+  data: ProductInterface[]
+  promotionProduct: ProductInterface[]
+}) {
   return (
     <>
       <Banner />
-      <BestProducts products={data} />
+      <PromotionProducts products={promotionProduct} />
+      <BannerCategories />
+      <ProductsSection products={data} />
     </>
   )
 }

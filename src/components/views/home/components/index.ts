@@ -1,4 +1,7 @@
-import { BestProducts } from './bestProducts'
+import { PromotionProducts } from './promotionProducts'
 import { Banner } from './banner'
+import { ProductsSection } from './products'
 
-export { BestProducts, Banner }
+// ProductsSection
+
+export { PromotionProducts, Banner, ProductsSection }

@@ -4,7 +4,7 @@ import SearchImput from './partials/searchImput'
 
 export default function Header() {
   return (
-    <header className="w-full border-b-2 border-indigo-500">
+    <header className="w-full border-b-2  border-indigo-500">
       <div className="container h-20 flex justify-between items-center ">
         <section className="flex">
           <b className="text-4xl font-dos">FINESS</b>

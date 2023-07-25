@@ -9,20 +9,21 @@ body {
 .container {
   max-width: 1440px;
   padding: 0px 20px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 .splide__pagination__page {
   &:hover {
-    background: #8284ed;
+    @apply bg-[#6366f1];
   }
 }
 .splide__pagination__page.is-active {
-  background: #6366f1;
+  @apply bg-[#6366f1];
 }
-
 .splide__arrow svg {
-  fill: #6366f1;
+  @apply fill-[#6366f1];
 }
 .splide__arrow:hover:not(:disabled) svg {
-  fill: #8284ed;
+  @apply fill-[#6366f1];
 }

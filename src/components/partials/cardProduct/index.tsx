@@ -5,8 +5,6 @@ import { useState } from 'react'
 export function CardProduct({ product }: { product: ProductInterface }) {
   const [clicked, setClicked] = useState<boolean>(false)
 
-  console.log(product.images[0])
-
   return (
     <section className="flex flex-col p-2 items-center">
       <div className="flex w-[300px] flex-col p-2 pb-10 items-start">
