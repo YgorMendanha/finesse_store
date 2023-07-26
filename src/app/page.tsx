@@ -4,7 +4,7 @@ import ShuffleProducts from '@/utils/functions/ShuffleProducts'
 
 async function getProducts() {
   try {
-    const data = await Product.Get()
+    const data: any = []
 
     return data
   } catch (error) {
