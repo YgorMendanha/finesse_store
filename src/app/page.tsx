@@ -12,9 +12,7 @@ async function getProducts() {
 export default async function Home() {
   const product = await getProducts()
 
-  console.log(product)
+  const promotionProduct = ShuffleProducts(product)
 
-  // const promotionProduct = ShuffleProducts(product)
-
-  return <HomePage data={product} promotionProduct={product} />
+  return <HomePage data={product} promotionProduct={promotionProduct} />
 }
