@@ -3,8 +3,6 @@ import { ProductInterface } from '@/types/products'
 export default function ShuffleProducts(products: ProductInterface[]) {
   const promotionProductTemp: ProductInterface[] = []
 
-  console.log(products)
-
   do {
     const idx = Math.floor(Math.random() * products.length)
     const product = products[idx]
