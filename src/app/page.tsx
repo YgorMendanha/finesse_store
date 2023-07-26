@@ -1,22 +1,18 @@
 import HomePage from '@/components/views/home'
-import { Product } from '@/server/products'
 import ShuffleProducts from '@/utils/functions/ShuffleProducts'
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 async function getProducts() {
-  try {
-    const data: any = []
-
-    return data
-  } catch (error) {
-    console.log(error)
-    return []
-  }
+  const data = await prisma.product.findMany()
+  return data
 }
 
 export default async function Home() {
   const product = await getProducts()
 
-  const promotionProduct = ShuffleProducts(product)
+  // const promotionProduct = ShuffleProducts(product)
 
-  return <HomePage data={product} promotionProduct={promotionProduct} />
+  return <HomePage data={product} promotionProduct={product} />
 }

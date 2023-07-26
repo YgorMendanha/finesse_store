@@ -14,6 +14,7 @@ model Product {
   id          Int      @id @default(autoincrement())
   name        String
   categorty   String
+  color       String
   price       Float
   ratings     Float
   description String

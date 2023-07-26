@@ -10,7 +10,7 @@ export function CardProduct({ product }: { product: ProductInterface }) {
       <div className="flex w-[300px] flex-col p-2 pb-10 items-start">
         <Image src={product.images[0]} width={300} height={300} alt="Image 2" />
         <div className="flex w-full flex-col my-2 ">
-          <small>{product.categortyChild}</small>
+          <small>{product.categorty}</small>
           <h3>
             <b>{product.name}</b>
           </h3>

@@ -183,12 +183,13 @@ async function main() {
       create: {
         id: product.id,
         name: product.name,
-        description: product.description,
-        variants: product.variants,
+        categorty: product.categorty,
+        color: product.color,
         price: product.price,
         ratings: product.ratings,
+        variants: product.variants,
+        description: product.description,
         stock: product.stock,
-        categorty: product.categorty,
         images: product.images
       }
     })

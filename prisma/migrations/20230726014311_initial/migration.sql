@@ -3,6 +3,7 @@ CREATE TABLE "product" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "categorty" TEXT NOT NULL,
+    "color" TEXT NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "ratings" DOUBLE PRECISION NOT NULL,
     "description" TEXT NOT NULL,
