@@ -14,7 +14,7 @@ const ProductsDataBase = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 5,
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-1-1.jpg`]
+    images: [`https://finess-store.vercel.app/api/assets?image=product-1-1.jpg`]
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const ProductsDataBase = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 7,
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-1-2.jpg`]
+    images: [`https://finess-store.vercel.app/api/assets?image=product-1-2.jpg`]
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ const ProductsDataBase = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 7,
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-2-1.jpg`]
+    images: [`https://finess-store.vercel.app/api/assets?image=product-2-1.jpg`]
   },
   {
     id: 4,
@@ -53,7 +53,7 @@ const ProductsDataBase = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 3,
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-2-2.jpg`]
+    images: [`https://finess-store.vercel.app/api/assets?image=product-2-2.jpg`]
   },
   {
     id: 5,
@@ -67,8 +67,8 @@ const ProductsDataBase = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 4,
     images: [
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-3-1.jpg`,
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-3-2.jpg`
+      `https://finess-store.vercel.app/api/assets?image=product-3-1.jpg`,
+      `https://finess-store.vercel.app/api/assets?image=product-3-2.jpg`
     ]
   },
   {
@@ -83,8 +83,8 @@ const ProductsDataBase = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 5,
     images: [
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-4-1.jpg`,
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-4-2.jpg`
+      `https://finess-store.vercel.app/api/assets?image=product-4-1.jpg`,
+      `https://finess-store.vercel.app/api/assets?image=product-4-2.jpg`
     ]
   },
   {
@@ -98,7 +98,7 @@ const ProductsDataBase = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 3,
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-5-1.jpg`]
+    images: [`https://finess-store.vercel.app/api/assets?image=product-5-1.jpg`]
   },
   {
     id: 8,
@@ -111,7 +111,7 @@ const ProductsDataBase = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 9,
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-6-1.jpg`]
+    images: [`https://finess-store.vercel.app/api/assets?image=product-6-1.jpg`]
   },
   {
     id: 9,
@@ -125,8 +125,8 @@ const ProductsDataBase = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 4,
     images: [
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-7-1.jpg`,
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-7-2.jpg`
+      `https://finess-store.vercel.app/api/assets?image=product-7-1.jpg`,
+      `https://finess-store.vercel.app/api/assets?image=product-7-2.jpg`
     ]
   },
   {
@@ -140,7 +140,7 @@ const ProductsDataBase = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 6,
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-8-1.jpg`]
+    images: [`https://finess-store.vercel.app/api/assets?image=product-8-1.jpg`]
   },
   {
     id: 11,
@@ -153,7 +153,7 @@ const ProductsDataBase = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 8,
-    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-9-1.jpg`]
+    images: [`https://finess-store.vercel.app/api/assets?image=product-9-1.jpg`]
   },
   {
     id: 12,
@@ -167,8 +167,8 @@ const ProductsDataBase = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis risus vel nisl maximus ultrices. Nulla facilisi. In nunc est, volutpat quis congue vitae, volutpat sit amet ipsum. Nulla id nibh pretium, tempor risus tincidunt, tincidunt diam. Etiam at elementum sapien, elementum cursus urna. Aenean tempus a magna eu eleifend. Nunc placerat libero vestibulum enim commodo rhoncus. Vestibulum mollis sem sed aliquet volutpat. Quisque aliquet urna et tempor ornare. Fusce tincidunt vitae nisi vitae vehicula. Fusce sem ipsum, posuere et ullamcorper eget, dictum ut quam. Pellentesque vel turpis orci.',
     stock: 9,
     images: [
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-10-1.jpg`,
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/assets?image=product-10-2.jpg`
+      `https://finess-store.vercel.app/api/assets?image=product-10-1.jpg`,
+      `https://finess-store.vercel.app/api/assets?image=product-10-2.jpg`
     ]
   }
 ]
