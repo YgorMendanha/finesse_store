@@ -12,18 +12,3 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-
-.splide__pagination__page {
-  &:hover {
-    @apply bg-[#6366f1];
-  }
-}
-.splide__pagination__page.is-active {
-  @apply bg-[#6366f1];
-}
-.splide__arrow svg {
-  @apply fill-[#6366f1];
-}
-.splide__arrow:hover:not(:disabled) svg {
-  @apply fill-[#6366f1];
-}

@@ -3,20 +3,19 @@ import { ContextProvider } from '@/context'
 import { Layout } from '@/components/layout'
 
 import './globals.css'
-import '@splidejs/react-splide/css/skyblue';
+import '@splidejs/splide/css'
 
 const geo = Geologica({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-geologica',
+  variable: '--font-geologica'
 })
- 
+
 const dos = Dosis({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-dosis',
+  variable: '--font-dosis'
 })
- 
 
 export const metadata = {
   title: 'Create Next App',
