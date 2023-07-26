@@ -179,7 +179,18 @@ async function main() {
   data.map(async (product) => {
     const result = await prisma.product.upsert({
       where: { id: product.id },
-      update: {},
+      update: {
+        id: product.id,
+        name: product.name,
+        categorty: product.categorty,
+        color: product.color,
+        price: product.price,
+        ratings: product.ratings,
+        variants: product.variants,
+        description: product.description,
+        stock: product.stock,
+        images: product.images
+      },
       create: {
         id: product.id,
         name: product.name,
