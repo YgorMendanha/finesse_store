@@ -1,19 +1,64 @@
 'use client'
 
 import { ProductInterface } from '@/types/products'
-import React from 'react'
+import { useState, useMemo } from 'react'
 import { Splide, SplideSlide, type Options } from '@splidejs/react-splide'
 import { CardProduct } from '@/components/partials/cardProduct'
+import { useWindowSize } from '@/hooks/useWindowSize'
 
 export const PromotionProducts = ({ products }: { products: ProductInterface[] }) => {
-  const option: Options = {
-    perPage: 3,
+  const { width } = useWindowSize()
+  const [option, setOption] = useState<Options>({
+    perPage: 4,
     gap: '1rem'
-  }
+  })
+
+  useMemo(() => {
+    if (!width) return
+    switch (true) {
+      case width < 375:
+        {
+          setOption({
+            perPage: 1,
+            gap: '1rem'
+          })
+        }
+
+        return
+      case width < 640:
+        {
+          setOption({
+            perPage: 2,
+            gap: '1rem'
+          })
+        }
+
+        return
+
+      case width < 1280:
+        {
+          setOption({
+            perPage: 3,
+            gap: '1rem'
+          })
+        }
+
+        return
+
+      default:
+        {
+          setOption({
+            perPage: 4,
+            gap: '1rem'
+          })
+        }
+        return
+    }
+  }, [width])
 
   return (
     <div className="w-full mt-5 flex flex-col container">
-      <h2 className="my-7 mx-auto text-4xl ">Promoções do dia</h2>
+      <h2 className="my-7 mx-auto text-2xl md:text-4xl">Promoções do dia</h2>
       <Splide options={option} aria-label="My Favorite Images">
         {products.map((product) => {
           return (

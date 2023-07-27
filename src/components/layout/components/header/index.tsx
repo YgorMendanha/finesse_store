@@ -9,17 +9,17 @@ export default function Header() {
         <section className="flex">
           <b className="text-4xl font-dos">FINESS</b>
           <nav className="flex mx-5 items-center">
-            <p className="mx-4 cursor-pointer text-lg hover:border-b-2 hover:border-indigo-500">
+            <p className="hidden md:inline-block mx-4 cursor-pointer text-lg hover:border-b-2 hover:border-indigo-500">
               Loja
             </p>
-            <p className="mx-4 cursor-pointer text-lg hover:border-b-2 hover:border-indigo-500">
+            <p className="hidden md:inline-block mx-4 cursor-pointer text-lg hover:border-b-2 hover:border-indigo-500">
               Contato
             </p>
           </nav>
         </section>
         <section className="flex text-xl items-center">
-          <SearchImput />
-          <BsFillHeartFill className="mx-4" />
+          <SearchImput className="hidden md:inline-block" />
+          <BsFillHeartFill className="mx-4 hidden md:inline-block" />
           <BsBag className="mx-4" />
           <AiOutlineUser className="mx-4" />
         </section>
