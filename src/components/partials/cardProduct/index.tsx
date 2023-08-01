@@ -8,12 +8,12 @@ export function CardProduct({ product }: { product: ProductInterface }) {
   return (
     <section className="flex flex-col p-2 items-center">
       <div className="flex w-[180px] md:w-[240px] lg:w-[300px] flex-col p-2 pb-10 items-start">
-        <div className="w-full pt-[100%] relative">
+        <div className="w-full bg-[#f5f5f5] pt-[100%] relative">
           <Image
             src={product.images[0]}
             fill
             alt={`image-${product.id}-${product.name}`}
-            className="border-4 rounded-md border-indigo-500 object-cover"
+            className="border-4 rounded-md border-indigo-500"
           />
         </div>
 
