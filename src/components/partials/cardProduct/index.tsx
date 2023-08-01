@@ -12,6 +12,7 @@ export function CardProduct({ product }: { product: ProductInterface }) {
           <Image
             src={product.images[0]}
             fill
+            sizes="(max-width: 640px) 180px, (max-width: 768px) 240px 300px"
             alt={`image-${product.id}-${product.name}`}
             className="border-4 rounded-md border-indigo-500"
           />

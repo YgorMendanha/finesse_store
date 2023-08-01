@@ -46,6 +46,7 @@ export const Banner = () => {
             <Image
               className="object-cover"
               src={each}
+              priority
               alt="product-image"
               width={400}
               height={400}
