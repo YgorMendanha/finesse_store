@@ -20,7 +20,7 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
   // User
   const Login = useCallback(async (loginProps: { user: string; password: string }) => {
     try {
-      const user = await User.login(loginProps)
+      // const user = await User.login(loginProps)
     } catch (e) {
       console.log(e)
     }

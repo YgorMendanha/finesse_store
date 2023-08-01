@@ -4,6 +4,7 @@ import { Layout } from '@/components/layout'
 
 import './globals.css'
 import '@splidejs/splide/css'
+import 'react-slideshow-image/dist/styles.css'
 
 const geo = Geologica({
   subsets: ['latin'],

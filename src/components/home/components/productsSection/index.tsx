@@ -1,10 +1,11 @@
 'use client'
 
 import { ProductInterface } from '@/types/products'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, Suspense } from 'react'
 import { Splide, SplideSlide, type Options } from '@splidejs/react-splide'
 import { CardProduct } from '@/components/partials/cardProduct'
 import { useWindowSize } from '@/hooks/useWindowSize'
+import { CardProductLoading } from '@/components/partials/cardProductLoading'
 
 export const ProductsSection = ({ products }: { products: ProductInterface[] }) => {
   const { width } = useWindowSize()
@@ -59,15 +60,33 @@ export const ProductsSection = ({ products }: { products: ProductInterface[] }) 
   return (
     <div className="w-full mb-10 flex flex-col container">
       <h2 className="my-7 mx-auto text-2xl md:text-4xl">Produtos Populares</h2>
-      <Splide options={option} aria-label="My Favorite Images">
-        {products.map((product) => {
-          return (
-            <SplideSlide key={product.id}>
-              <CardProduct product={product} />
-            </SplideSlide>
-          )
-        })}
-      </Splide>
+      {!width ? (
+        <CardProductLoading />
+      ) : (
+        <Splide options={option} aria-label="My Favorite Images">
+          {products && products.length > 0 ? (
+            <>
+              {products.map((product) => {
+                return (
+                  <SplideSlide key={product.id}>
+                    <CardProduct product={product} />
+                  </SplideSlide>
+                )
+              })}
+            </>
+          ) : (
+            <>
+              {products.map((product) => {
+                return (
+                  <SplideSlide key={product.id}>
+                    <CardProductLoading />
+                  </SplideSlide>
+                )
+              })}
+            </>
+          )}
+        </Splide>
+      )}
     </div>
   )
 }
