@@ -14,5 +14,6 @@ export async function GET(request: Request) {
   // @ts-ignore: Return File in Api
   const response = new NextResponse(imageBuffer)
   response.headers.set('content-type', 'image/jpg')
+  response.headers.set('Cache-Control', 's-maxage=31536000')
   return response
 }
