@@ -26,7 +26,7 @@ export default function SearchImput({ className = '' }: { className?: string }) 
         propsComponent={{
           icon: <BsSearch onClick={changeStyle} className="cursor-pointer" />,
           className: `transition-all duration-700 ${
-            style === 'show' ? `border-indigo-500` : `border-[transparent]`
+            style === 'show' ? `border-indigo-500` : `border-[transparent] bg-slate-50`
           }`
         }}
       />
