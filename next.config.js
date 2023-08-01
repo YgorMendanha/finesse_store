@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'finess-store.vercel.app'
+        hostname: 'finess-store-bucket.s3.sa-east-1.amazonaws.com'
       }
     ]
   }

@@ -1,7 +1,7 @@
 import HomePage from '@/components/views/home'
-import { ProductsDataBase } from '@/utils/database/Products'
 import ShuffleProducts from '@/utils/functions/ShuffleProducts'
 import { PrismaClient } from '@prisma/client'
+import { ProductsDataBase } from '../../prisma/seed'
 
 const prisma = new PrismaClient()
 
