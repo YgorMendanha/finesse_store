@@ -28,7 +28,7 @@ export function CardProduct({ product }: { product: ProductInterface }) {
           </p>
           <button
             onClick={() => setClicked(!clicked)}
-            className={`my-2 bg-gradient-to-b w-full text-indigo-500 font-semibold from-indigo-50 to-indigo-100 px-10 py-3 rounded-2xl shadow-indigo-400 border-b-4 hover  border-indigo-200  transition-all duration-75  ${
+            className={`my-2 bg-gradient-to-b w-full text-indigo-500 font-semibold from-indigo-50 to-indigo-100 px-10 py-3 rounded-2xl shadow-indigo-400 border-b-4 border-indigo-200  transition-all duration-75  ${
               clicked ? 'shadow-sm' : 'shadow-md'
             } `}
           >

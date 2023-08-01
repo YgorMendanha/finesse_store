@@ -40,7 +40,7 @@ export const Banner = () => {
     <div className="w-full">
       {!width ? (
         <div
-          className={`flex justify-center items-center relative bg-gradient-to-r from-black via-zinc-400 to-black `}
+          className={`flex justify-center items-center bg-gradient-to-r from-black via-zinc-400 to-black `}
         >
           <Image
             className="object-cover"
