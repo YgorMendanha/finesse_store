@@ -1,9 +1,7 @@
 'use client'
 
-import InputComponent from '@/components/partials/input'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { useMemo, useState } from 'react'
-import { BsSearch } from 'react-icons/bs'
 
 export default function Menu() {
   const [open, setOpen] = useState(false)
@@ -22,8 +20,8 @@ export default function Menu() {
   }, [width])
 
   return (
-    <>
-      {showBtn && (
+    showBtn && (
+      <>
         <button
           onClick={() => setOpen((state) => !state)}
           className={`group mx-2 flex h-10 w-10 z-40 cursor-pointer items-center justify-center rounded-3xl bg-slate-50 p-2 hover:bg-slate-200
@@ -44,38 +42,38 @@ export default function Menu() {
             />
           </div>
         </button>
-      )}
 
-      <div
-        className={`w-full h-full left-0 fixed top-0 transition-all duration-1000 ${
-          open ? 'z-20 bg-[#000000bd] ' : 'invisible'
-        } `}
-      />
+        <div
+          className={`w-full h-full left-0 fixed top-0 transition-all duration-1000 ${
+            open ? 'z-20 bg-[#000000bd] ' : 'invisible'
+          } `}
+        />
 
-      <div
-        className={`max-w-[500px] w-full h-full fixed top-0 ransition-all duration-1000  ${
-          open ? 'z-30 bg-neutral-900 left-0 ' : '-left-20 invisible'
-        } `}
-      >
-        <section
-          className={`m-auto mt-2 w-[95%] p-5 pt-[70px] rounded-xl ransition-all duration-700  ${
-            open ? 'z-400 bg-indigo-500 left-0' : '-left-20'
-          }`}
+        <div
+          className={`max-w-[500px] w-full h-full fixed top-0 ransition-all duration-1000  ${
+            open ? 'z-30 bg-neutral-900 left-0 ' : '-left-20 invisible'
+          } `}
         >
-          <p className={`transition-all duration-1000 ${open ? 'text-white' : 'text-transparent'}`}>
-            shear
-          </p>
-          <p className={`transition-all duration-1000 ${open ? 'text-white' : 'text-transparent'}`}>
-            Loja
-          </p>
-          <p className={`transition-all duration-1000 ${open ? 'text-white' : 'text-transparent'}`}>
-            Favoritos
-          </p>
-          <p className={`transition-all duration-1000 ${open ? 'text-white' : 'text-transparent'}`}>
-            Minha conta
-          </p>
-        </section>
-      </div>
-    </>
+          <section
+            className={`m-auto mt-2 w-[95%] p-5 pt-[70px] rounded-xl ransition-all duration-700  ${
+              open ? 'z-400 bg-indigo-500 left-0' : '-left-20'
+            }`}
+          >
+            <p className={`transition-all duration-1000 text-transparent ${open && 'text-white'}`}>
+              shear
+            </p>
+            <p className={`transition-all duration-1000 text-transparent ${open && 'text-white'}`}>
+              Loja
+            </p>
+            <p className={`transition-all duration-1000 text-transparent ${open && 'text-white'}`}>
+              Favoritos
+            </p>
+            <p className={`transition-all duration-1000 text-transparent ${open && 'text-white'}`}>
+              Minha conta
+            </p>
+          </section>
+        </div>
+      </>
+    )
   )
 }

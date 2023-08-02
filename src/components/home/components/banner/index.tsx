@@ -40,11 +40,11 @@ export const Banner = () => {
     <div className="w-full">
       {!width ? (
         <div
-          className={`flex justify-center items-center bg-gradient-to-r from-black via-zinc-400 to-black `}
+          className={`flex justify-center h-[450px] items-center bg-gradient-to-r from-black via-zinc-400 to-black `}
         >
           <Image
             className="object-cover"
-            src={images[0]}
+            src={'/images/banner/product-2-1.png'}
             priority
             alt="product-image"
             width={400}
@@ -56,7 +56,7 @@ export const Banner = () => {
           {images.map((each, index) => (
             <div
               key={index}
-              className={`flex justify-center items-center relative bg-gradient-to-r from-black via-zinc-400 to-black `}
+              className={`flex justify-center h-[450px] items-center relative bg-gradient-to-r from-black via-zinc-400 to-black `}
             >
               <Image
                 className="object-cover"

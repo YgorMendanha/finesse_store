@@ -25,13 +25,16 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
+    "react-multi-carousel": "^2.8.4",
     "react-slideshow-image": "^4.2.1",
     "sharp": "^0.32.4",
     "tailwindcss": "3.3.2",
+    "ua-parser-js": "^1.0.35",
     "use-context-selector": "^1.4.1"
   },
   "devDependencies": {
     "@types/node": "^20.4.1",
+    "@types/ua-parser-js": "^0.7.36",
     "prisma": "^5.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
