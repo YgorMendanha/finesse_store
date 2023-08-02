@@ -9,7 +9,7 @@ export function Footer() {
       </small>
       <small className="flex flex-1">
         <div className="m-auto flex">
-          <BsFacebook className="m-2 text-lg " />
+          <BsFacebook className="m-2 text-base " />
           <BsYoutube className="m-2 text-lg " />
           <AiFillInstagram className="m-2 text-lg " />
         </div>

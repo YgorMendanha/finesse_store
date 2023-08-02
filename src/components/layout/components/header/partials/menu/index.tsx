@@ -2,6 +2,7 @@
 
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { useMemo, useState } from 'react'
+import SearchImput from '../searchImput'
 
 export default function Menu() {
   const [open, setOpen] = useState(false)
@@ -44,32 +45,68 @@ export default function Menu() {
         </button>
 
         <div
-          className={`w-full h-full left-0 fixed top-0 transition-all duration-1000 ${
+          className={`w-full h-full left-0 fixed top-0 transition-all duration-700 ${
             open ? 'z-20 bg-[#000000bd] ' : 'invisible'
           } `}
         />
 
         <div
-          className={`max-w-[500px] w-full h-full fixed top-0 ransition-all duration-1000  ${
+          className={`max-w-[500px] w-full h-full fixed top-0 ransition-all duration-700  ${
             open ? 'z-30 bg-neutral-900 left-0 ' : '-left-20 invisible'
           } `}
         >
           <section
-            className={`m-auto mt-2 w-[95%] p-5 pt-[70px] rounded-xl ransition-all duration-700  ${
+            className={`m-auto mt-2 w-[95%] p-5 pt-[70px] rounded-xl ransition-all duration-500  ${
               open ? 'z-400 bg-indigo-500 left-0' : '-left-20'
             }`}
           >
-            <p className={`transition-all duration-1000 text-transparent ${open && 'text-white'}`}>
-              shear
+            <SearchImput
+              btnDisabled
+              initial="show"
+              duration="75"
+              className={` ${!open && 'invisible'}`}
+            />
+            <p
+              className={`transition-all duration-300 text-transparent ${
+                open ? 'text-white' : 'invisible'
+              }`}
+            >
+              Home
             </p>
-            <p className={`transition-all duration-1000 text-transparent ${open && 'text-white'}`}>
+            <p
+              className={`transition-all duration-300 text-transparent ${
+                open ? 'text-white' : 'invisible'
+              }`}
+            >
               Loja
             </p>
-            <p className={`transition-all duration-1000 text-transparent ${open && 'text-white'}`}>
+            <p
+              className={`transition-all duration-300 text-transparent ${
+                open ? 'text-white' : 'invisible'
+              }`}
+            >
+              Carrinho
+            </p>
+            <p
+              className={`transition-all duration-300 text-transparent ${
+                open ? 'text-white' : 'invisible'
+              }`}
+            >
               Favoritos
             </p>
-            <p className={`transition-all duration-1000 text-transparent ${open && 'text-white'}`}>
+            <p
+              className={`transition-all duration-300 text-transparent ${
+                open ? 'text-white' : 'invisible'
+              }`}
+            >
               Minha conta
+            </p>
+            <p
+              className={`transition-all duration-300 text-transparent ${
+                open ? 'text-white' : 'invisible'
+              }`}
+            >
+              Contato
             </p>
           </section>
         </div>
