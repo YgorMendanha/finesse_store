@@ -24,7 +24,7 @@ const zoomInProperties = {
   )
 }
 
-export const Banner = () => {
+export const BannerHome = () => {
   const { width } = useWindowSize()
   //Array of Images
   const images = [

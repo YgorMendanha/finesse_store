@@ -64,7 +64,7 @@ export default function Menu() {
               btnDisabled
               initial="show"
               duration="75"
-              className={` ${!open && 'invisible'}`}
+              className={`${!open && 'invisible'}`}
             />
             <p
               className={`transition-all duration-300 text-transparent ${

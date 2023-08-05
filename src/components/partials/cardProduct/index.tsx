@@ -1,12 +1,20 @@
+'use client'
+
 import { ProductInterface } from '@/types/products'
 import Image from 'next/image'
 import { useState } from 'react'
 
-export function CardProduct({ product }: { product: ProductInterface }) {
+export function CardProduct({
+  product,
+  className = ''
+}: {
+  product: ProductInterface
+  className?: string
+}) {
   const [clicked, setClicked] = useState<boolean>(false)
 
   return (
-    <section className="flex flex-col p-2 items-center">
+    <section className={`flex flex-col p-2 items-center ${className}`}>
       <div className="flex w-[180px] md:w-[240px] lg:w-[300px] flex-col p-2 pb-10 items-start">
         <div className="w-full bg-[#f5f5f5] pt-[100%] relative">
           <Image

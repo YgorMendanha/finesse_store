@@ -1,6 +1,6 @@
 'use client'
 
-import InputComponent from '@/components/partials/input'
+import { InputComponent } from '@/components/partials'
 import { useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 

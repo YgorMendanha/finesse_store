@@ -2,8 +2,8 @@
 
 import { ProductInterface } from '@/types/products'
 import Carousel from 'react-multi-carousel'
-import { CardProduct } from '@/components/partials/cardProduct'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+import { CardProduct } from '@/components/partials'
 
 export const ProductsSection = ({
   products,
@@ -36,7 +36,7 @@ export const ProductsSection = ({
       onMove,
       carouselState: { currentSlide, deviceType }
     } = rest
-    
+
     return (
       <IoIosArrowForward
         className="absolute right-0 text-4xl cursor-pointer text-indigo-500"
@@ -50,7 +50,7 @@ export const ProductsSection = ({
       onMove,
       carouselState: { currentSlide, deviceType }
     } = rest
-    
+
     return (
       <IoIosArrowBack
         className="absolute left-0 text-4xl cursor-pointer text-indigo-500"

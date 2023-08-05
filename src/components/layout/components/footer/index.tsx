@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="w-full flex md:flex-row flex-col p-2 px-5 border-t-2 border-indigo-500">
       <small className="flex flex-1">
-        <b className="font-dos text-xl m-auto">FINESS</b>
+        <b className="font-dos text-xl m-auto">FINESSE</b>
       </small>
       <small className="flex flex-1">
         <div className="m-auto flex">

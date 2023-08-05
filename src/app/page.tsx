@@ -1,10 +1,11 @@
 import ShuffleProducts from '@/utils/functions/ShuffleProducts'
 import { PrismaClient } from '@prisma/client'
-import { Banner, ProductsSection } from '@/components/home/components'
-import { BannerCategories } from '@/components/home/components/bannerCategories'
 import { ProductsDataBase } from '@/utils/database/products'
 import { headers } from 'next/headers'
 import UAParser from 'ua-parser-js'
+import { BannerHome } from '@/components/home/banner'
+import { ProductsSection } from '@/components/home'
+import { BannerCategories } from '@/components/home/bannerCategories'
 
 const prisma = new PrismaClient()
 
@@ -39,7 +40,7 @@ export default async function Home() {
 
   return (
     <>
-      <Banner />
+      <BannerHome />
       <ProductsSection products={promotionProduct} deviceType={deviceType} />
       <BannerCategories />
       <ProductsSection products={products} deviceType={deviceType} />
