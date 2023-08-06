@@ -37,12 +37,14 @@ export function ProductsGrid({ products }: { products: ProductInterface[] }) {
     return params.toString()
   }
 
+  const sort = searchParams.get('sort')
   useEffect(() => {
-    const sort = searchParams.get('sort')
     if (sort) {
       setValue('sort', sort)
+    } else {
+      setValue('sort', '')
     }
-  }, [])
+  }, [sort])
 
   // Filter Products
   useMemo(() => {
