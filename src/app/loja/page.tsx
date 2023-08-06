@@ -3,8 +3,6 @@ import { ProductsGrid } from '@/components/partials/productsGrid'
 import { ProductsDataBase } from '@/utils/database/products'
 import { PrismaClient } from '@prisma/client'
 
-import { FaFilter } from 'react-icons/fa'
-
 const prisma = new PrismaClient()
 
 async function getProducts() {
@@ -24,14 +22,6 @@ export default async function Shop() {
   return (
     <>
       <Banner className="mb-3" title="Loja" />
-      <section className="container w-full flex">
-        
-        <select className="ml-auto border-2 text-end appearance-none rounded outline-10 outline-indigo-500 cursor-pointer p-1">
-          <option>Padrão</option>
-          <option value="US">Maior para Menor Valor</option>
-          <option value="CA">Menor para Maior Valor</option>
-        </select>
-      </section>
 
       <section className="min-h-screen flex container">
         <FilterProductsComponent

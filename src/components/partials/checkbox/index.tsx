@@ -1,26 +1,41 @@
 'use client'
 
-import React, { useId } from 'react'
-import { ImSpinner10 } from 'react-icons/im'
-
-interface PropsComponent {
-  label?: string
-}
+import { useSearchParams } from 'next/navigation'
+import React, { useEffect, useId, useRef } from 'react'
 
 export function CheckboxComponent({
   label,
-  className = ''
+  className = '',
+  onClick,
+  name
 }: {
   label?: string
   className?: string
+  onClick?: (e: boolean) => void
+  name: string
 }) {
   const id = useId()
+  const inputRef = useRef<HTMLInputElement>(null)
+  const searchParams = useSearchParams()
+
+  const colorsQuery = searchParams.get(name)
+
+  useEffect(() => {
+    const colorsQueryFormat = colorsQuery ? JSON.parse(colorsQuery) : []
+    if (inputRef.current) {
+      let check = false
+      colorsQueryFormat.find((c: string) => c === label) && (check = true)
+      inputRef.current.checked = check
+    }
+  }, [colorsQuery, inputRef.current])
 
   return (
     <div className={`flex flex-row ${className}`}>
       <input
         type="checkbox"
         id={id}
+        ref={inputRef}
+        onClick={() => onClick && onClick(inputRef.current?.checked || false)}
         className="
        appearance-none h-6 w-6 bg-gray-400 rounded-full 
        checked:bg-indigo-300 checked:scale-75
