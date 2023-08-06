@@ -1,8 +1,8 @@
 'use client'
 
-import { InputComponent } from '@/components/partials'
 import { useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
+import { InputComponent } from '@/components/partials'
 
 export default function SearchImput({
   className = '',

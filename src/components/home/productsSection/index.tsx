@@ -1,9 +1,9 @@
 'use client'
 
-import { ProductInterface } from '@/types/products'
-import Carousel from 'react-multi-carousel'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+import Carousel from 'react-multi-carousel'
 import { CardProduct } from '@/components/partials'
+import { ProductInterface } from '@/types/products'
 
 export const ProductsSection = ({
   products,

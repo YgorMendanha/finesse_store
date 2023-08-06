@@ -1,11 +1,11 @@
 'use client'
 
-import { useWindowSize } from '@/hooks/useWindowSize'
 import Image from 'next/image'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 
 //These are Third party packages for smooth slideshow
 import { Zoom } from 'react-slideshow-image'
+import { useWindowSize } from '@/hooks/useWindowSize'
 
 const zoomInProperties = {
   scale: 1,

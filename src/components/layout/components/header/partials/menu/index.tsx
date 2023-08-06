@@ -1,8 +1,8 @@
 'use client'
 
-import { useWindowSize } from '@/hooks/useWindowSize'
 import { useMemo, useState } from 'react'
 import SearchImput from '../searchImput'
+import { useWindowSize } from '@/hooks/useWindowSize'
 
 export default function Menu() {
   const [open, setOpen] = useState(false)

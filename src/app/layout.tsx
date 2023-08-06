@@ -1,6 +1,6 @@
 import { Geologica, Dosis } from 'next/font/google'
-import { ContextProvider } from '@/context'
 import { Layout } from '@/components/layout'
+import { ContextProvider } from '@/context'
 
 import './globals.css'
 import 'react-multi-carousel/lib/styles.css'

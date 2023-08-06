@@ -1,11 +1,11 @@
-import ShuffleProducts from '@/utils/functions/ShuffleProducts'
 import { PrismaClient } from '@prisma/client'
-import { ProductsDataBase } from '@/utils/database/products'
 import { headers } from 'next/headers'
 import UAParser from 'ua-parser-js'
-import { BannerHome } from '@/components/home/banner'
 import { ProductsSection } from '@/components/home'
+import { BannerHome } from '@/components/home/banner'
 import { BannerCategories } from '@/components/home/bannerCategories'
+import { ProductsDataBase } from '@/utils/database/products'
+import ShuffleProducts from '@/utils/functions/ShuffleProducts'
 
 const prisma = new PrismaClient()
 

@@ -1,7 +1,7 @@
+import { PrismaClient } from '@prisma/client'
 import { Banner, FilterProductsComponent, InputComponent } from '@/components/partials'
 import { ProductsGrid } from '@/components/partials/productsGrid'
 import { ProductsDataBase } from '@/utils/database/products'
-import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 

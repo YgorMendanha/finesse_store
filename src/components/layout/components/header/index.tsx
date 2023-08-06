@@ -1,7 +1,7 @@
-import { BsBag, BsFillHeartFill, BsSearch } from 'react-icons/bs'
 import { AiOutlineUser } from 'react-icons/ai'
-import SearchImput from './partials/searchImput'
+import { BsBag, BsFillHeartFill, BsSearch } from 'react-icons/bs'
 import Menu from './partials/menu'
+import SearchImput from './partials/searchImput'
 import { CustomLink } from '@/components/partials'
 
 export default function Header() {

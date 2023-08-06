@@ -1,8 +1,8 @@
 'use client'
 
-import { ProductInterface } from '@/types/products'
 import Image from 'next/image'
 import { useState } from 'react'
+import { ProductInterface } from '@/types/products'
 
 export function CardProduct({
   product,
