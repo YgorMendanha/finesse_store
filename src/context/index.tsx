@@ -1,10 +1,9 @@
 'use client'
 
-import { useCallback, useEffect, useReducer, useRef } from 'react'
+import { useCallback, useReducer } from 'react'
 import { createContext } from 'use-context-selector'
 import Reducers from './reducer'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-import { User } from '@/server/user'
 import { ContextType, State } from '@/types'
 
 const intialState: State = {
