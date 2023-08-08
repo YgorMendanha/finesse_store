@@ -26,7 +26,7 @@ export function DetailsProducts({ product }: { product: ProductInterface }) {
             {formatPrice({ currency: 'BRL', language: 'pt-BR', value: product.price * qty })}
           </b>
         </div>
-        <ButtonComponent className="text-xl my-5">Adicionar ao Carrinho</ButtonComponent>
+        <ButtonComponent className="text-xl my-5 shadow-lg">Adicionar ao Carrinho</ButtonComponent>
         <p>{product.description}</p>
       </section>
     </div>

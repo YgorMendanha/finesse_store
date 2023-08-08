@@ -5,6 +5,7 @@ import { CardProduct } from './cardProduct'
 import { FilterProductsComponent } from './filter'
 import { InputComponent } from './input'
 import { InputQty } from './inputQty'
+import { Notification } from './notification'
 
 export {
   Banner,
@@ -13,5 +14,6 @@ export {
   InputComponent,
   FilterProductsComponent,
   ButtonComponent,
-  InputQty
+  InputQty,
+  Notification
 }

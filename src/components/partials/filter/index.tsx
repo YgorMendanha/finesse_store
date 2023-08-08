@@ -59,7 +59,7 @@ export function FilterProductsComponent({
     resolver: zodResolver(createFilterFormShema)
   })
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (e.target.name === 'minValue') {
       const value = e.target.value
         ?.replace(/\D/g, '')
@@ -137,14 +137,14 @@ export function FilterProductsComponent({
         <div className="flex">
           <InputComponent
             propsInput={{
-              ...register('minValue', { required: true }),
+              ...register('minValue'),
               onChange: (e) => onChange(e)
             }}
             propsComponent={{ className: 'mx-3', label: 'Min' }}
           />
           <InputComponent
             propsInput={{
-              ...register('maxValue', { required: true }),
+              ...register('maxValue'),
               onChange: (e) => onChange(e)
             }}
             propsComponent={{ className: 'mx-3', label: 'Max' }}

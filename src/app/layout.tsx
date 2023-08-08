@@ -5,6 +5,7 @@ import { ContextProvider } from '@/context'
 import './globals.css'
 import 'react-multi-carousel/lib/styles.css'
 import 'react-slideshow-image/dist/styles.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 const geo = Geologica({
   subsets: ['latin'],

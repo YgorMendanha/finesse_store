@@ -17,9 +17,9 @@ export default function Header() {
             <CustomLink href={'/loja'}>
               <p className="mx-4 text-lg hover:border-b-2 hover:border-indigo-500">Loja</p>
             </CustomLink>
-            <p className="mx-4 cursor-pointer text-lg hover:border-b-2 hover:border-indigo-500">
+            <CustomLink href={'/contato'} className="mx-4 cursor-pointer text-lg hover:border-b-2 hover:border-indigo-500">
               Contato
-            </p>
+            </CustomLink>
           </nav>
         </section>
         <section className="flex text-xl items-center">

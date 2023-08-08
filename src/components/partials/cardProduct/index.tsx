@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
+import { CustomLink } from '../CustomLink'
 import { ProductInterface } from '@/types/products'
 
 export function CardProduct({
@@ -16,7 +17,7 @@ export function CardProduct({
   return (
     <section className={`flex flex-col p-2 items-center ${className}`}>
       <div className="flex w-[180px] md:w-[240px] lg:w-[300px] flex-col p-2 pb-10 items-start">
-        <div className="w-full bg-[#f5f5f5] pt-[100%] relative">
+        <CustomLink href={`/loja/${product.id}`} className="w-full bg-[#f5f5f5] pt-[100%] relative">
           <Image
             src={product.images[0]}
             fill
@@ -24,19 +25,21 @@ export function CardProduct({
             alt={`image-${product.id}-${product.name}`}
             className="border-4 rounded-md border-indigo-500"
           />
-        </div>
+        </CustomLink>
 
         <div className="flex w-full flex-col my-2 ">
           <small>{product.categorty}</small>
-          <h3 className="text-indigo-500 lg:text-xl truncate">
-            <b>{product.name}</b>
-          </h3>
+          <CustomLink href={`/loja/${product.id}`}>
+            <h3 className="text-indigo-500 lg:text-xl truncate">
+              <b>{product.name}</b>
+            </h3>
+          </CustomLink>
           <p>
             <b>{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
           </p>
           <button
             onClick={() => setClicked(!clicked)}
-            className={`my-2 bg-gradient-to-b w-full text-indigo-500 font-semibold from-indigo-50 to-indigo-100 px-10 py-3 rounded-2xl shadow-indigo-400 border-b-4 border-indigo-200  transition-[box-shadow] duration-75  ${
+            className={`my-2 bg-gradient-to-b w-full text-indigo-500 font-semibold from-indigo-50 to-indigo-100 px-10 py-3 rounded-2xl shadow-indigo-400 border-b-4 border-indigo-200 transition-[box-shadow] duration-75  ${
               clicked ? 'shadow-sm' : 'shadow-md'
             } `}
           >
