@@ -18,18 +18,30 @@ export function Breadcrumb({
             <b>Home</b>
           </CustomLink>
         </li>
-        {URLs.map((content, idx) => (
-          <li key={idx}>
-            <CustomLink
-              href={content.url || '#'}
-              className={`after:content-[${
-                content.url || '#'
-              }] after:ml-2 text-gray-600 hover:text-indigo-700`}
-            >
-              <b>{content.name}</b>
-            </CustomLink>
-          </li>
-        ))}
+        {URLs.map((content, idx) => {
+          if (idx === URLs.length - 1) {
+            return (
+              <li key={idx}>
+                <CustomLink
+                  href={content.url || '#'}
+                  className={`text-gray-600 hover:text-indigo-700`}
+                >
+                  <b>{content.name}</b>
+                </CustomLink>
+              </li>
+            )
+          }
+          return (
+            <li key={idx}>
+              <CustomLink
+                href={content.url || '#'}
+                className={`after:content-['/'] after:ml-2 text-gray-600 hover:text-indigo-700`}
+              >
+                <b>{content.name}</b>
+              </CustomLink>
+            </li>
+          )
+        })}
       </ol>
     </nav>
   )
