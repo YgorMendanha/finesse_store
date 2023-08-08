@@ -1,17 +1,10 @@
 import { PrismaClient } from '@prisma/client'
-import { Banner, FilterProductsComponent, InputComponent } from '@/components/partials'
+import { Banner, FilterProductsComponent } from '@/components/partials'
 import { ProductsGrid } from '@/components/partials/productsGrid'
-import { ProductsDataBase } from '@/utils/database/products'
-
-const prisma = new PrismaClient()
-
-async function getProducts() {
-  const data = await prisma.product.findMany()
-  return data
-}
+import { Product } from '@/server/products'
 
 export default async function Shop() {
-  const products = ProductsDataBase
+  const products = await Product.GetAll()
 
   const categorys = products.map((product) => product.categorty)
   const categoryFormat = [...new Set(categorys)]

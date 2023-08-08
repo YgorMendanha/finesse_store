@@ -26,7 +26,7 @@ function getDeviceType() {
 }
 
 export default async function Home() {
-  const products = ProductsDataBase
+  const products = await Product.GetAll()
 
   const promotionProduct = ShuffleProducts(products)
 

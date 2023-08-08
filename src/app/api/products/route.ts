@@ -1,7 +1,17 @@
+import { headers } from 'next/headers'
 import prisma from '../../../../prisma/client'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
+
+  const headersList = headers()
+  const athentication = headersList.get('Authentication')
+
+  if (Buffer.from(athentication?.split(' ')[1]!, 'base64').toString('utf8') !== process.env.TOKEN) {
+    return new Response('unauthorized', {
+      status: 401
+    })
+  }
 
   const id = searchParams.get('id')
   const search = searchParams.get('search')

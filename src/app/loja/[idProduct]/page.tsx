@@ -1,14 +1,11 @@
-import { PrismaClient } from '@prisma/client'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import { DetailsProducts } from './components/detailsPrtoducts'
 import { Breadcrumb } from '@/components/partials/breadCrumb'
 import { Product } from '@/server/products'
-import { ProductInterface } from '@/types/products'
-import { ProductsDataBase } from '@/utils/database/products'
 
 export default async function Shop({ params }: { params: { idProduct: string } }) {
-  const product = ProductsDataBase[1]
+  const product = await Product.GetById({ idProduct: params.idProduct })
 
   if (!product) {
     return redirect('/loja')
