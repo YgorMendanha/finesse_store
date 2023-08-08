@@ -11,7 +11,7 @@ async function getProducts() {
 }
 
 export default async function Shop() {
-  const products = process.env.NODE_ENV === 'development' ? ProductsDataBase : await getProducts()
+  const products = ProductsDataBase
 
   const categorys = products.map((product) => product.categorty)
   const categoryFormat = [...new Set(categorys)]

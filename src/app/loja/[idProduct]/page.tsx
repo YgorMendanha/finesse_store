@@ -8,7 +8,7 @@ import { ProductInterface } from '@/types/products'
 import { ProductsDataBase } from '@/utils/database/products'
 
 export default async function Shop({ params }: { params: { idProduct: string } }) {
-  const product = await Product.GetById({ idProduct: params.idProduct })
+  const product = ProductsDataBase[1]
 
   if (!product) {
     return redirect('/loja')
