@@ -7,18 +7,8 @@ import { Product } from '@/server/products'
 import { ProductInterface } from '@/types/products'
 import { ProductsDataBase } from '@/utils/database/products'
 
-const prisma = new PrismaClient()
-
-async function getProduct(id: string) {
-  const data = await prisma.product.findUnique({
-    where: { id: Number(id) }
-  })
-
-  return data
-}
-
 export default async function Shop({ params }: { params: { idProduct: string } }) {
-  const product = await getProduct(params.idProduct)
+  const product = await Product.GetById({ idProduct: params.idProduct })
 
   if (!product) {
     return redirect('/loja')

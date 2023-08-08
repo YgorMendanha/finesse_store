@@ -30,6 +30,7 @@ export function FilterProductsComponent({
 
   const minValue = searchParams.get('minValue')
   const maxValue = searchParams.get('maxValue')
+  
   useEffect(() => {
     if (minValue) {
       setValue(

@@ -1,8 +1,18 @@
 'use client'
 
-import { useState } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useCallback, useMemo, useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { BsSearch } from 'react-icons/bs'
+import { z } from 'zod'
 import { InputComponent } from '@/components/partials'
+
+type Inputs = z.infer<typeof createFilterFormShema>
+
+const createFilterFormShema = z.object({
+  search: z.string()
+})
 
 export default function SearchImput({
   className = '',
@@ -15,7 +25,26 @@ export default function SearchImput({
   btnDisabled?: boolean
   duration?: string
 }) {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const [style, setStyle] = useState(initial)
+  const { register, watch, handleSubmit } = useForm<Inputs>({
+    resolver: zodResolver(createFilterFormShema)
+  })
+
+  const onSubmit = (data: Inputs) =>
+    router.push('/loja?' + createQueryString('search', data.search))
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      // @ts-ignore Url Error
+      const params = new URLSearchParams(searchParams)
+      params.set(name, value)
+
+      return params.toString()
+    },
+    [searchParams]
+  )
 
   function changeStyle() {
     if (btnDisabled) return
@@ -27,7 +56,8 @@ export default function SearchImput({
   }
 
   return (
-    <div
+    <form
+      onSubmit={handleSubmit(onSubmit)}
       className={`transition-all duration-${duration} ${
         style === 'show' ? `max-w-[500px]` : `max-w-[35px]`
       }
@@ -35,7 +65,10 @@ export default function SearchImput({
       `}
     >
       <InputComponent
-        propsInput={{ id: 'searh' }}
+        propsInput={{
+          id: 'searh',
+          ...register('search')
+        }}
         propsComponent={{
           icon: <BsSearch onClick={changeStyle} className="cursor-pointer" />,
           className: `transition-all duration-${duration} ${
@@ -43,6 +76,6 @@ export default function SearchImput({
           }`
         }}
       />
-    </div>
+    </form>
   )
 }

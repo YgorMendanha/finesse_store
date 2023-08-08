@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { AiOutlineShopping } from 'react-icons/ai'
 import { z } from 'zod'
 import { CardProduct } from '../cardProduct'
+import { Product } from '@/server/products'
 import { ProductInterface } from '@/types/products'
 
 const createFilterFormShema = z.object({
@@ -24,6 +25,7 @@ export function ProductsGrid({ products }: { products: ProductInterface[] }) {
   const minValueQuery = searchParams.get('minValue')
   const maxValueQuery = searchParams.get('maxValue')
   const sortQuery = searchParams.get('sort')
+  const searchQuery = searchParams.get('search')
 
   const { register, setValue } = useForm<Inputs>({
     resolver: zodResolver(createFilterFormShema)
@@ -37,14 +39,22 @@ export function ProductsGrid({ products }: { products: ProductInterface[] }) {
     return params.toString()
   }
 
-  const sort = searchParams.get('sort')
   useEffect(() => {
-    if (sort) {
-      setValue('sort', sort)
+    if (sortQuery) {
+      setValue('sort', sortQuery)
     } else {
       setValue('sort', '')
     }
-  }, [sort])
+  }, [sortQuery])
+
+  useMemo(async () => {
+    if (searchQuery) {
+      const searchProducts = await Product.Search(searchQuery)
+      setProductsFormated(searchProducts)
+    } else {
+      setProductsFormated(products)
+    }
+  }, [searchQuery])
 
   // Filter Products
   useMemo(() => {

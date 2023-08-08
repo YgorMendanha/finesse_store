@@ -6,9 +6,9 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 import { ButtonComponent, InputComponent, Notification } from '@/components/partials'
 
-type Inputs = z.infer<typeof createFilterFormShema>
+type Inputs = z.infer<typeof createMessageFormShema>
 
-const createFilterFormShema = z.object({
+const createMessageFormShema = z.object({
   contact: z.string().nonempty('Digite uma forma de Contato'),
   name: z.string().nonempty('Digite seu nome'),
   message: z.string().nonempty('Digite sua Mensagem')
@@ -22,7 +22,7 @@ export default function ContactPage() {
     handleSubmit,
     formState: { errors }
   } = useForm<Inputs>({
-    resolver: zodResolver(createFilterFormShema)
+    resolver: zodResolver(createMessageFormShema)
   })
 
   const onSubmit: SubmitHandler<Inputs> = () => {

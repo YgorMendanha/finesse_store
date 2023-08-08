@@ -4,10 +4,9 @@ import UAParser from 'ua-parser-js'
 import { ProductsSection } from '@/components/home'
 import { BannerHome } from '@/components/home/banner'
 import { BannerCategories } from '@/components/home/bannerCategories'
+import { Product } from '@/server/products'
 import { ProductsDataBase } from '@/utils/database/products'
 import ShuffleProducts from '@/utils/functions/ShuffleProducts'
-
-const prisma = new PrismaClient()
 
 function getDeviceType() {
   let userAgent
@@ -26,13 +25,8 @@ function getDeviceType() {
   return { deviceType }
 }
 
-async function getProducts() {
-  const data = await prisma.product.findMany()
-  return data
-}
-
 export default async function Home() {
-  const products = process.env.NODE_ENV === 'development' ? ProductsDataBase : await getProducts()
+  const products = await Product.GetAll()
 
   const promotionProduct = ShuffleProducts(products)
 
