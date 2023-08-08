@@ -1,4 +1,3 @@
-import { PrismaClient } from '@prisma/client'
 import { Banner, FilterProductsComponent } from '@/components/partials'
 import { ProductsGrid } from '@/components/partials/productsGrid'
 import { Product } from '@/server/products'

@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ButtonComponent, CardProduct, InputQty } from '@/components/partials'
-import { Breadcrumb } from '@/components/partials/breadCrumb'
+import { ButtonComponent, InputQty } from '@/components/partials'
 import { ProductInterface } from '@/types/products'
 import { formatPrice } from '@/utils/functions/foramatPrice'
 
