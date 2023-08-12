@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+import { ImSpinner10 } from 'react-icons/im'
 import { Banner, FilterProductsComponent } from '@/components/partials'
 import { ProductsGrid } from '@/components/partials/productsGrid'
 import { Product } from '@/server/products'
@@ -16,12 +18,14 @@ export default async function Shop() {
       <Banner className="mb-3" title="Loja" />
 
       <section className="min-h-screen flex container">
-        <FilterProductsComponent
-          className="xl:block hidden"
-          categorys={categoryFormat}
-          colors={colorsFormat}
-        />
-        <ProductsGrid products={products} />
+        <Suspense fallback={<ImSpinner10 className="animate-spin text-2xl m-auto" />}>
+          <FilterProductsComponent
+            className="xl:block hidden"
+            categorys={categoryFormat}
+            colors={colorsFormat}
+          />
+          <ProductsGrid products={products} />
+        </Suspense>
       </section>
     </>
   )
