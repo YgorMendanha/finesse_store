@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { AiOutlineShopping } from 'react-icons/ai'
 import { z } from 'zod'
 import { CardProduct } from '../cardProduct'
+import { useFavoriteProducts } from '@/hooks/useUser'
 import { Product } from '@/server/products'
 import { ProductInterface } from '@/types/products'
 
@@ -16,10 +17,20 @@ const createFilterFormShema = z.object({
 
 type Inputs = z.infer<typeof createFilterFormShema>
 
-export function ProductsGrid({ products }: { products: ProductInterface[] }) {
+export function ProductsGrid({
+  products,
+  favoriteGrid
+}: {
+  products: ProductInterface[]
+  favoriteGrid: boolean
+}) {
   const searchParams = useSearchParams()
   const router = useRouter()
+
   const [productsFormated, setProductsFormated] = useState<ProductInterface[]>([])
+
+  const { favoriteProducts } = useFavoriteProducts()
+
   const colorsQuery = searchParams.get('color')
   const categoryQuery = searchParams.get('category')
   const minValueQuery = searchParams.get('minValue')
@@ -129,11 +140,21 @@ export function ProductsGrid({ products }: { products: ProductInterface[] }) {
     }
 
     if (!colorsQuery && !categoryQuery && !minValueQuery && !maxValueQuery) {
-      setProductsFormated(products)
+      favoriteGrid ? setProductsFormated(favoriteProducts) : setProductsFormated(products)
     } else {
-      setProductsFormated([...new Set(productsFormatedTemp)])
+      favoriteGrid
+        ? setProductsFormated(favoriteProducts)
+        : setProductsFormated([...new Set(productsFormatedTemp)])
     }
-  }, [colorsQuery, categoryQuery, minValueQuery, maxValueQuery, sortQuery])
+  }, [
+    colorsQuery,
+    categoryQuery,
+    minValueQuery,
+    maxValueQuery,
+    sortQuery,
+    favoriteGrid,
+    favoriteProducts
+  ])
 
   return (
     <div className="w-full flex flex-col ">

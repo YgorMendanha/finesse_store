@@ -33,7 +33,9 @@ export default function Header() {
           <Suspense fallback={<ImSpinner10 className="animate-spin text-2xl m-auto" />}>
             <SearchImput className="hidden md:inline-block" />
           </Suspense>
-          <BsFillHeartFill className="mx-4 hidden md:inline-block" />
+          <CustomLink href={'/favoritos'}>
+            <BsFillHeartFill className="mx-4 hidden md:inline-block" />
+          </CustomLink>
           <BsBag className="mx-4" />
           <AiOutlineUser className="mx-4" />
         </section>

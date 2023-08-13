@@ -1,8 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useMemo, useState } from 'react'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { CustomLink } from '../CustomLink'
+import { useFavoriteProducts } from '@/hooks/useUser'
 import { ProductInterface } from '@/types/products'
 
 export function CardProduct({
@@ -13,19 +16,42 @@ export function CardProduct({
   className?: string
 }) {
   const [clicked, setClicked] = useState<boolean>(false)
+  const [inFavoriteProducts, setInFavoriteProducts] = useState<boolean>(false)
+
+  const router = useRouter()
+
+  const { favoriteProducts, changeFavoriteProducts } = useFavoriteProducts()
+
+  useMemo(() => {
+    favoriteProducts.find((favoriteProduct) => favoriteProduct.id === product.id)
+      ? setInFavoriteProducts(true)
+      : setInFavoriteProducts(false)
+  }, [favoriteProducts])
 
   return (
     <section className={`flex flex-col p-2 items-center ${className}`}>
       <div className="flex w-[180px] md:w-[240px] lg:w-[300px] flex-col p-2 pb-10 items-start">
-        <CustomLink href={`/loja/${product.id}`} className="w-full bg-[#f5f5f5] pt-[100%] relative">
+        <div className="w-full bg-[#f5f5f5] pt-[100%] relative">
+          {inFavoriteProducts ? (
+            <AiFillHeart
+              onClick={() => changeFavoriteProducts(product)}
+              className="text-3xl z-50 absolute cursor-pointer top-3 text-indigo-500 ml-2"
+            />
+          ) : (
+            <AiOutlineHeart
+              onClick={() => changeFavoriteProducts(product)}
+              className="text-3xl z-50 absolute cursor-pointer top-3 text-indigo-500 ml-2"
+            />
+          )}
           <Image
             src={product.images[0]}
             fill
+            onClick={() => router.push(`/loja/${product.id}`)}
             sizes="(max-width: 640px) 180px, (max-width: 768px) 240px, 300px"
             alt={`image-${product.id}-${product.name}`}
-            className="border-4 rounded-md border-indigo-500"
+            className="border-4 rounded-md cursor-pointer border-indigo-500"
           />
-        </CustomLink>
+        </div>
 
         <div className="flex w-full flex-col my-2 ">
           <small>{product.categorty}</small>

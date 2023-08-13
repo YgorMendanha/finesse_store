@@ -1,16 +1,16 @@
-import { type Action, type State } from "@/types";
+import { type Action, type State } from '@/types'
 
 const Reducers = (state: State, action: Action): State => {
   switch (action.type) {
-    case "darkTheme":
+    case 'FAVORITE_PRODUCT':
       return {
         ...state,
-        darkTheme: !state.darkTheme 
-      };
+        favoriteProducts: action.payload
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default Reducers;
+export default Reducers

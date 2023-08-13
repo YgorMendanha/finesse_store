@@ -1,13 +1,13 @@
+import { ProductInterface } from '../products'
+
 export interface ContextType {
   state: State
   dispatch: React.Dispatch<Action>
-  Login: (props: { user: string; password: string }) => void
+  ChangeFavoriteProducts: (product: ProductInterface) => void
 }
 
 export interface State {
-  darkTheme: boolean
+  favoriteProducts: ProductInterface[]
 }
 
-export type Action =
-  | { type: 'darkTheme'; payload: boolean }
-  | { type: 'LOADINGUSER'; payload: boolean }
+export type Action = { type: 'FAVORITE_PRODUCT'; payload: ProductInterface[] }

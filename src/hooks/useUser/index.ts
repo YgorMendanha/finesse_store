@@ -1,10 +1,15 @@
 import { useContextSelector } from 'use-context-selector'
 import { context } from '@/context'
 
-export function useUser() {
-  const login = useContextSelector(context, (context) => context.Login)
+export function useFavoriteProducts() {
+  const changeFavoriteProducts = useContextSelector(
+    context,
+    (context) => context.ChangeFavoriteProducts
+  )
+  const favoriteProducts = useContextSelector(context, (context) => context.state.favoriteProducts)
 
   return {
-    login
+    changeFavoriteProducts,
+    favoriteProducts
   }
 }
