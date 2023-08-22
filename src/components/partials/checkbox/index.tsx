@@ -1,33 +1,31 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useId, useRef } from 'react'
+import React, { useId, useMemo, useRef } from 'react'
 
 export function CheckboxComponent({
   label,
   className = '',
   onClick,
-  name
+  checked = false
 }: {
   label?: string
   className?: string
   onClick?: (e: boolean) => void
-  name: string
+  name?: string
+  checked?: boolean
 }) {
   const id = useId()
   const inputRef = useRef<HTMLInputElement>(null)
-  const searchParams = useSearchParams()
 
-  const colorsQuery = searchParams.get(name)
-
-  useEffect(() => {
-    const colorsQueryFormat = colorsQuery ? JSON.parse(colorsQuery) : []
+  useMemo(() => {
     if (inputRef.current) {
-      let check = false
-      colorsQueryFormat.find((c: string) => c === label) && (check = true)
-      inputRef.current.checked = check
+      if (checked) {
+        inputRef.current.checked = checked
+      } else {
+        inputRef.current.checked = false
+      }
     }
-  }, [colorsQuery, inputRef.current])
+  }, [checked, inputRef.current])
 
   return (
     <div className={`flex flex-row ${className}`}>

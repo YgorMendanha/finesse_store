@@ -44,9 +44,9 @@ export function InputQty({
           ref: inputRef,
           onChange: (e) => returnValue(e.target.value)
         }}
-        propsComponent={{ className: 'rounded-l-lg rounded-r-none border-r-0' }}
+        propsComponent={{ className: 'rounded-l-lg rounded-r-none border-indigo-500 border-r-0' }}
       />
-      <div className="flex flex-col h-fill border-2 border-l-0 border-[#cacaca] rounded-r-lg">
+      <div className="flex flex-col h-fill border-2 border-l-0 border-indigo-500 rounded-r-lg">
         <button onClick={plusQty} className="mb-2">
           <AiOutlineArrowUp />
         </button>

@@ -30,7 +30,9 @@ export function FilterProductsComponent({
 
   const minValue = searchParams.get('minValue')
   const maxValue = searchParams.get('maxValue')
-  
+  const colorsQuery = searchParams.get('color') || '[]'
+  const categoryQuery = searchParams.get('category') || '[]'
+
   useEffect(() => {
     if (minValue) {
       setValue(
@@ -157,6 +159,7 @@ export function FilterProductsComponent({
         <p>Cores: </p>
         {colors.map((color, idx) => (
           <CheckboxComponent
+            checked={JSON.parse(colorsQuery).find((c: string) => c === color)}
             onClick={(e) => queryString(e, 'color', color)}
             className="pl-5 my-4"
             key={idx}
@@ -169,6 +172,7 @@ export function FilterProductsComponent({
         <p>Categorias: </p>
         {categorys.map((category, idx) => (
           <CheckboxComponent
+            checked={JSON.parse(categoryQuery).find((c: string) => c === category)}
             onClick={(e) => queryString(e, 'category', category)}
             className="pl-5 my-4"
             key={idx}

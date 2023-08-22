@@ -4,6 +4,7 @@ import { BsBag, BsFillHeartFill } from 'react-icons/bs'
 import { ImSpinner10 } from 'react-icons/im'
 import Menu from './partials/menu'
 import SearchImput from './partials/searchImput'
+import { UserModalComponent } from './partials/userModal'
 import { CustomLink } from '@/components/partials'
 
 export default function Header() {
@@ -37,7 +38,7 @@ export default function Header() {
             <BsFillHeartFill className="mx-4 hidden md:inline-block" />
           </CustomLink>
           <BsBag className="mx-4" />
-          <AiOutlineUser className="mx-4" />
+          <UserModalComponent />
         </section>
       </div>
     </header>

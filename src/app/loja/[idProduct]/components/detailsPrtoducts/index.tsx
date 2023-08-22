@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { ButtonComponent, InputQty } from '@/components/partials'
-import { ProductInterface } from '@/types/products'
+import { ProductInterface } from '@/types'
 import { formatPrice } from '@/utils/functions/foramatPrice'
 
 export function DetailsProducts({ product }: { product: ProductInterface }) {

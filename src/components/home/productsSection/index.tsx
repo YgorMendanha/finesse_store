@@ -3,7 +3,7 @@
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import Carousel from 'react-multi-carousel'
 import { CardProduct } from '@/components/partials'
-import { ProductInterface } from '@/types/products'
+import { ProductInterface } from '@/types'
 
 export const ProductsSection = ({
   products,

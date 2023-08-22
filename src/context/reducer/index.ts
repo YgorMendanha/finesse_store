@@ -8,6 +8,17 @@ const Reducers = (state: State, action: Action): State => {
         favoriteProducts: action.payload
       }
 
+    case 'USER':
+      return {
+        ...state,
+        user: action.payload
+      }
+    case 'LOADING':
+      return {
+        ...state,
+        loading: action.payload
+      }
+
     default:
       return state
   }

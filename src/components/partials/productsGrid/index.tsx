@@ -7,9 +7,9 @@ import { useForm } from 'react-hook-form'
 import { AiOutlineShopping } from 'react-icons/ai'
 import { z } from 'zod'
 import { CardProduct } from '../cardProduct'
-import { useFavoriteProducts } from '@/hooks/useUser'
+import { useFavoriteProducts } from '@/hooks/useFavoriteProducts'
 import { Product } from '@/server/products'
-import { ProductInterface } from '@/types/products'
+import { ProductInterface } from '@/types'
 
 const createFilterFormShema = z.object({
   sort: z.string()
@@ -22,7 +22,7 @@ export function ProductsGrid({
   favoriteGrid
 }: {
   products: ProductInterface[]
-  favoriteGrid: boolean
+  favoriteGrid?: boolean
 }) {
   const searchParams = useSearchParams()
   const router = useRouter()

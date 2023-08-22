@@ -1,4 +1,4 @@
-import { ProductInterface } from '@/types/products'
+import { ProductInterface } from '@/types'
 
 export default function ShuffleProducts(products: ProductInterface[]) {
   const promotionProductTemp: ProductInterface[] = []

@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useMemo, useState } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { CustomLink } from '../CustomLink'
-import { useFavoriteProducts } from '@/hooks/useUser'
-import { ProductInterface } from '@/types/products'
+import { useFavoriteProducts } from '@/hooks/useFavoriteProducts'
+import { ProductInterface } from '@/types'
 
 export function CardProduct({
   product,
@@ -35,12 +35,12 @@ export function CardProduct({
           {inFavoriteProducts ? (
             <AiFillHeart
               onClick={() => changeFavoriteProducts(product)}
-              className="text-3xl z-50 absolute cursor-pointer top-3 text-indigo-500 ml-2"
+              className="text-3xl z-10 absolute cursor-pointer top-3 text-indigo-500 ml-2"
             />
           ) : (
             <AiOutlineHeart
               onClick={() => changeFavoriteProducts(product)}
-              className="text-3xl z-50 absolute cursor-pointer top-3 text-indigo-500 ml-2"
+              className="text-3xl z-10 absolute cursor-pointer top-3 text-indigo-500 ml-2"
             />
           )}
           <Image
