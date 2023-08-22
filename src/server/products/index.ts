@@ -1,5 +1,5 @@
 import { featchApi } from '../api'
-import { ProductInterface } from '@/types/products'
+import { ProductInterface } from '@/types'
 
 export class Product {
   static async GetAll() {

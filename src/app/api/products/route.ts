@@ -7,7 +7,11 @@ export async function GET(request: Request) {
   const headersList = headers()
   const athentication = headersList.get('Authentication')
 
-  if (Buffer.from(athentication?.split(' ')[1]!, 'base64').toString('utf8') !== process.env.NEXT_PUBLIC_TOKEN) {
+  if (
+    !athentication ||
+    Buffer.from(athentication?.split(' ')[1]!, 'base64').toString('utf8') !==
+      process.env.NEXT_PUBLIC_TOKEN
+  ) {
     return new Response('unauthorized', {
       status: 401
     })
