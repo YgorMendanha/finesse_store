@@ -42,13 +42,13 @@ export function UserModalComponent() {
   }, [open])
 
   useEffect(() => {
-    if (user?.id && createAccount) {
+    if (user?.id) {
       setOpen(false)
-    }
-    if (user?.id && !createAccount) {
       setEditUser(true)
+    } else {
+      setEditUser(false)
     }
-  }, [user, createAccount])
+  }, [user])
 
   return (
     <>

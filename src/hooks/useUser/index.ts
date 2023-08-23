@@ -4,6 +4,7 @@ import { context } from '@/context'
 export function useUser() {
   const createUser = useContextSelector(context, (context) => context.CreateUser)
   const loginUser = useContextSelector(context, (context) => context.LoginUser)
+  const logoutUser = useContextSelector(context, (context) => context.LogoutUser)
   const updateUser = useContextSelector(context, (context) => context.EditUser)
 
   const user = useContextSelector(context, (context) => context.state.user)
@@ -12,6 +13,7 @@ export function useUser() {
     createUser,
     loginUser,
     user,
-    updateUser
+    updateUser,
+    logoutUser
   }
 }

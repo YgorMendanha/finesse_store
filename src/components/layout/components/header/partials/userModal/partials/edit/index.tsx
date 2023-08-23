@@ -22,7 +22,7 @@ const editUserFormShema = z.object({
 type InputsEdit = z.infer<typeof editUserFormShema>
 
 export function EditForm({ closeModal }: { closeModal: () => void }) {
-  const { user, updateUser } = useUser()
+  const { user, updateUser, logoutUser } = useUser()
   const { userLoading } = useLoading()
 
   const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -156,12 +156,19 @@ export function EditForm({ closeModal }: { closeModal: () => void }) {
           errorMessage: errors.cellphone?.message
         }}
       />
-      <ButtonComponent loading={String(userLoading)} className="mt-2">
+      <ButtonComponent type="submit" loading={String(userLoading)} className="mt-2">
         Salvar
       </ButtonComponent>
-      <ButtonComponent className="mt-2 bg-transparent border text-stone-950 border-black hover:bg-red-500 hover:text-white hover:border-red-500">
+      <button
+        onClick={() => {
+          logoutUser()
+          closeModal()
+        }}
+        type="button"
+        className={`w-full bg-indigo-500 rounded p-2 mt-2 bg-transparent border text-stone-950 border-black hover:bg-red-500 hover:text-white hover:border-red-500`}
+      >
         Sair
-      </ButtonComponent>
+      </button>
     </form>
   )
 }

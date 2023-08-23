@@ -10,6 +10,7 @@ export interface ContextType {
     saveLogin: boolean
   }) => void
   LoginUser: (props: { data: { email: string; password: string }; saveLogin: boolean }) => void
+  LogoutUser: () => void
   EditUser: (
     id: number,
     props: {

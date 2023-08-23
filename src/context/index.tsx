@@ -83,6 +83,17 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
     []
   )
 
+  const LogoutUser = useCallback(async () => {
+    LoadingChange('user', true)
+    dispatch({
+      type: 'USER',
+      payload: {} as UserInterface
+    })
+    window.localStorage.removeItem('Y.M.Finesse-User')
+    window.sessionStorage.removeItem('Y.M.Finesse-User')
+    LoadingChange('user', false)
+  }, [])
+
   const CreateUser = useCallback(
     async (props: {
       data: { name: string; email: string; password: string; cellphone: string }
@@ -217,7 +228,8 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
         ChangeFavoriteProducts,
         CreateUser,
         LoginUser,
-        EditUser
+        EditUser,
+        LogoutUser
       }}
     >
       {children}
