@@ -121,9 +121,9 @@ export default function CartPage() {
           ) : (
             <div className="w-full mt-40  flex flex-col">
               <h2 className="m-auto my-5 text-2xl">Você não possui Produtos no Carrinho </h2>
-              <ButtonComponent className="mx-auto w-[90%]">
-                <CustomLink href={'/shop'}>Visitar Loja</CustomLink>
-              </ButtonComponent>
+              <CustomLink href={'/shop'}>
+                <ButtonComponent className="mx-auto w-[90%]">Visitar Loja</ButtonComponent>
+              </CustomLink>
             </div>
           )}
         </div>
