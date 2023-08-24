@@ -131,7 +131,7 @@ export function FilterProductsComponent({
       <div className="flex justify-between">
         <h3 className="text-xl">Filtros</h3>
         <BsTrash2Fill
-          onClick={() => router.push('/loja')}
+          onClick={() => router.push('/shop')}
           className="text-indigo-500 text-xl cursor-pointer "
         />
       </div>

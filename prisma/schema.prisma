@@ -32,6 +32,16 @@ model User {
   email     String @unique
   cellphone String
   password  String
+  Cart      Cart[]
 
   @@map("user")
+}
+
+model Cart {
+  id       Int   @id @default(autoincrement())
+  user     User? @relation(fields: [userId], references: [id])
+  products Json?
+  userId   Int?
+
+  @@map("cart")
 }

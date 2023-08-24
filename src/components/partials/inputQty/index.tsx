@@ -6,19 +6,21 @@ import { InputComponent } from '@/components/partials'
 
 export function InputQty({
   className,
+  getValue,
   value
 }: {
   className?: string
-  value?: (e: string | undefined) => void
+  getValue?: (e: string | undefined) => void
+  value?: number
 }) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const returnValue = (valueOnChange?: string) => {
-    if (valueOnChange && value) {
-      value(valueOnChange)
+    if (valueOnChange && getValue) {
+      getValue(valueOnChange)
       return
     }
-    value && value(inputRef.current?.value)
+    getValue && getValue(inputRef.current?.value)
   }
 
   const plusQty = () => {
@@ -42,6 +44,7 @@ export function InputQty({
           defaultValue: 1,
           min: 1,
           ref: inputRef,
+          value,
           onChange: (e) => returnValue(e.target.value)
         }}
         propsComponent={{ className: 'rounded-l-lg rounded-r-none border-indigo-500 border-r-0' }}

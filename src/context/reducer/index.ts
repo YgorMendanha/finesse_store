@@ -13,6 +13,11 @@ const Reducers = (state: State, action: Action): State => {
         ...state,
         user: action.payload
       }
+    case 'CART':
+      return {
+        ...state,
+        cart: action.payload
+      }
     case 'LOADING':
       return {
         ...state,

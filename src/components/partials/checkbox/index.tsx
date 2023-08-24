@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useId, useMemo, useRef } from 'react'
+import React, { useId, useEffect, useRef } from 'react'
 
 export function CheckboxComponent({
   label,
@@ -17,7 +17,7 @@ export function CheckboxComponent({
   const id = useId()
   const inputRef = useRef<HTMLInputElement>(null)
 
-  useMemo(() => {
+  useEffect(() => {
     if (inputRef.current) {
       if (checked) {
         inputRef.current.checked = checked

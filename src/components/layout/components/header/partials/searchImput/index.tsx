@@ -2,8 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useCallback,  useState } from 'react'
-import {  useForm } from 'react-hook-form'
+import { useCallback, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { BsSearch } from 'react-icons/bs'
 import { z } from 'zod'
 import { InputComponent } from '@/components/partials'
@@ -33,7 +33,7 @@ export default function SearchImput({
   })
 
   const onSubmit = (data: Inputs) =>
-    router.push('/loja?' + createQueryString('search', data.search))
+    router.push('/shop?' + createQueryString('search', data.search))
 
   const createQueryString = useCallback(
     (name: string, value: string) => {

@@ -8,7 +8,7 @@ export default async function Shop({ params }: { params: { idProduct: string } }
   const product = await Product.GetById({ idProduct: params.idProduct })
 
   if (!product) {
-    return redirect('/loja')
+    return redirect('/shop')
   }
 
   return (
@@ -16,7 +16,7 @@ export default async function Shop({ params }: { params: { idProduct: string } }
       <Breadcrumb
         className="mb-5"
         URLs={[
-          { name: 'Loja', url: '/loja' },
+          { name: 'Loja', url: '/shop' },
           { name: product.name, url: '#' }
         ]}
       />

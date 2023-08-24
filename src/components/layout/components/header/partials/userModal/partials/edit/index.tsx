@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { AiFillEye, AiFillEyeInvisible, AiOutlineUser } from 'react-icons/ai'
 import { BsFillTelephoneFill } from 'react-icons/bs'
@@ -49,7 +49,7 @@ export function EditForm({ closeModal }: { closeModal: () => void }) {
     }
   }
 
-  useMemo(() => {
+  useEffect(() => {
     if (user?.id) {
       setValue('name', user.name)
       setValue('email', user.email)

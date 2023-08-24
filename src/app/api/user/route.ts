@@ -186,7 +186,7 @@ export async function PATCH(request: Request) {
     }
 
     return new Response(JSON.stringify(responseFormat), {
-      status: 201
+      status: 200
     })
   } catch (error: any) {
     console.log(error)

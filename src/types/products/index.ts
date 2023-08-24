@@ -9,4 +9,5 @@ export interface ProductInterface {
   description: string
   stock: number
   images: string[]
+  qty?: number
 }

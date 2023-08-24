@@ -19,11 +19,11 @@ export default function Header() {
             <b className="text-4xl font-dos">FINESSE</b>
           </CustomLink>
           <nav className="mx-5 items-center hidden md:flex">
-            <CustomLink href={'/loja'}>
+            <CustomLink href={'/shop'}>
               <p className="mx-4 text-lg hover:border-b-2 hover:border-indigo-500">Loja</p>
             </CustomLink>
             <CustomLink
-              href={'/contato'}
+              href={'/contact'}
               className="mx-4 cursor-pointer text-lg hover:border-b-2 hover:border-indigo-500"
             >
               Contato
@@ -34,10 +34,12 @@ export default function Header() {
           <Suspense fallback={<ImSpinner10 className="animate-spin text-2xl m-auto" />}>
             <SearchImput className="hidden md:inline-block" />
           </Suspense>
-          <CustomLink href={'/favoritos'}>
+          <CustomLink href={'/wishlist'}>
             <BsFillHeartFill className="mx-4 hidden md:inline-block" />
           </CustomLink>
-          <BsBag className="mx-4" />
+          <CustomLink href={'/cart'}>
+            <BsBag className="mx-4" />
+          </CustomLink>
           <UserModalComponent />
         </section>
       </div>

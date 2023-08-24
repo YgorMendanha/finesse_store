@@ -1,3 +1,4 @@
+import { CartInterface } from '../cart'
 import { ProductInterface } from '../products'
 import { UserInterface } from '../user'
 
@@ -21,15 +22,27 @@ export interface ContextType {
       cellphone: string
     }
   ) => void
+  CreateCart: () => void
+  UpdateCart: (
+    id: number,
+    payload: {
+      id?: number
+      products?: ProductInterface[]
+      userId?: number | null
+    }
+  ) => void
+  AddToCart: (payload: ProductInterface) => void
 }
 
 export interface State {
   favoriteProducts: ProductInterface[]
   user: UserInterface
-  loading: { userLoading: boolean }
+  cart: CartInterface
+  loading: { userLoading: boolean; cartLoading: boolean }
 }
 
 export type Action =
   | { type: 'FAVORITE_PRODUCT'; payload: ProductInterface[] }
   | { type: 'USER'; payload: UserInterface }
-  | { type: 'LOADING'; payload: { userLoading: boolean } }
+  | { type: 'CART'; payload: CartInterface }
+  | { type: 'LOADING'; payload: { userLoading: boolean; cartLoading: boolean } }
