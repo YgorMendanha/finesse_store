@@ -84,7 +84,7 @@ export function CardProduct({
                 addToCart({ ...product, qty: 1 })
                 setLoading(true)
               } else {
-                router.push(`/carrinho/${cart.id}`)
+                router.push(`/shop/${cart.id}`)
               }
             }}
             className={`my-2 bg-gradient-to-b w-full text-indigo-500 font-semibold from-indigo-50 to-indigo-100 px-10 py-3 rounded-2xl shadow-indigo-400 border-b-4 border-indigo-200 transition-[box-shadow] duration-75  ${
