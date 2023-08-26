@@ -67,6 +67,7 @@ export default function SearchImput({
       <InputComponent
         propsInput={{
           id: 'searh',
+          'aria-label': 'Search',
           ...register('search')
         }}
         propsComponent={{

@@ -13,12 +13,12 @@ const zoomInProperties = {
   transitionDuration: 300,
   infinite: true,
   prevArrow: (
-    <div className="ml-10">
+    <div role="button" className="ml-10">
       <MdKeyboardArrowLeft className="h-8 w-8 text-white cursor-pointer" />
     </div>
   ),
   nextArrow: (
-    <div className="mr-10">
+    <div role="button" className="mr-10">
       <MdKeyboardArrowRight className="h-8 w-8 text-white cursor-pointer" />
     </div>
   )
@@ -26,6 +26,7 @@ const zoomInProperties = {
 
 export const BannerHome = () => {
   const { width } = useWindowSize()
+
   //Array of Images
   const images = [
     '/images/banner/product-2-1.png',
@@ -33,8 +34,6 @@ export const BannerHome = () => {
     '/images/banner/product-7-2.png',
     '/images/banner/product-8-1.png'
   ]
-
-  //These are custom properties for zoom effect while slide-show
 
   return (
     <div className="w-full">

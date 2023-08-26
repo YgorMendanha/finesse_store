@@ -34,10 +34,10 @@ export default function Header() {
           <Suspense fallback={<ImSpinner10 className="animate-spin text-2xl m-auto" />}>
             <SearchImput className="hidden md:inline-block" />
           </Suspense>
-          <CustomLink href={'/wishlist'}>
+          <CustomLink aria-label="Visite seus produtos favoritos" href={'/wishlist'}>
             <BsFillHeartFill className="mx-4 hidden md:inline-block" />
           </CustomLink>
-          <CustomLink href={'/cart'}>
+          <CustomLink aria-label="Veja os itens no seu carrinho" href={'/cart'}>
             <BsBag className="mx-4" />
           </CustomLink>
           <UserModalComponent />

@@ -66,6 +66,7 @@ export const ProductsSection = ({
         <Carousel
           className="w-full"
           ssr
+          aria-hidden="true"
           deviceType={deviceType}
           customRightArrow={<CustomRightArrow />}
           customLeftArrow={<CustomLeftArrow />}

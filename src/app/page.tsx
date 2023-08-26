@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import { headers } from 'next/headers'
 import UAParser from 'ua-parser-js'
 import { ProductsSection } from '@/components/home'
@@ -21,6 +22,10 @@ function getDeviceType() {
   const deviceType = (result.device && result.device.type) || 'desktop'
 
   return { deviceType }
+}
+
+export const metadata: Metadata = {
+  title: 'Home'
 }
 
 export default async function Home() {

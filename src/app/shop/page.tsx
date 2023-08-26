@@ -1,8 +1,13 @@
+import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { ImSpinner10 } from 'react-icons/im'
 import { Banner, FilterProductsComponent } from '@/components/partials'
 import { ProductsGrid } from '@/components/partials/productsGrid'
 import { Product } from '@/server/products'
+
+export const metadata: Metadata = {
+  title: 'Loja'
+}
 
 export default async function Shop() {
   const products = await Product.GetAll()
