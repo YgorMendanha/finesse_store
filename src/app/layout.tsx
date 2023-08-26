@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import { Geologica, Dosis } from 'next/font/google'
 import { Layout } from '@/components/layout'
 import { ContextProvider } from '@/context'
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ContextProvider>
           <Layout>{children}</Layout>
         </ContextProvider>
+        <Analytics />
       </body>
     </html>
   )
