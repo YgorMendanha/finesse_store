@@ -258,15 +258,19 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
       try {
         const response = await Cart.Update(id, payload)
 
-        if (response.data.id) {
+        if (response?.data?.id) {
           setCartStorage(response.data)
           dispatch({
             type: 'CART',
             payload: response.data
           })
         }
+        if (response.code === 'P2025') {
+          CreateCart()
+        }
         LoadingChange('cart', false)
       } catch (error) {
+        console.log(error)
         Notification.user({ content: dict.weWereUnableToUpdateYourCart, type: 'info' })
       }
       LoadingChange('cart', false)

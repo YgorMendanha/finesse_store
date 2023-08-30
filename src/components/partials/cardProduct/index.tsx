@@ -80,7 +80,7 @@ export function CardProduct({
           <Image
             src={product.images[0]}
             fill
-            onClick={() => router.push(`/shop/${product.id}`)}
+            onClick={() => router.push(`${lang === 'en' ? '/en/' : '/'}shop/${product.id}`)}
             sizes="(max-width: 640px) 180px, (max-width: 768px) 240px, 300px"
             alt={`image-${product.id}-${lang === 'en' ? product.nameEN : product.namePT}`}
             className="border-4 rounded-md cursor-pointer border-indigo-500"
@@ -107,7 +107,7 @@ export function CardProduct({
                 addToCart({ ...product, qty: 1 })
                 setLoading(true)
               } else {
-                lang === 'en' ? router.push(`/en/shop/${cart.id}`) : router.push(`/shop/${cart.id}`)
+                lang === 'en' ? router.push(`/en/shop/${product.id}`) : router.push(`/shop/${product.id}`)
               }
             }}
             className={`my-2 bg-gradient-to-b w-full text-indigo-500 font-semibold from-indigo-50 to-indigo-100 px-10 py-3 rounded-2xl shadow-indigo-400 border-b-4 border-indigo-200 transition-[box-shadow] duration-75  ${

@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { BsSearch } from 'react-icons/bs'
@@ -32,8 +32,10 @@ export default function SearchImput({
     resolver: zodResolver(createFilterFormShema)
   })
 
+  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+
   const onSubmit = (data: Inputs) =>
-    router.push('/shop?' + createQueryString('search', data.search))
+    router.push(`${lang === 'en' ? '/en/' : '/'}shop?` + createQueryString('search', data.search))
 
   const createQueryString = useCallback(
     (name: string, value: string) => {

@@ -30,7 +30,7 @@
   "inCart": "No Carrinho",
   "toAdd": "Adicionar",
   "filters": "Filtros",
-  "colors": "Colors",
+  "colors": "Cores",
   "categories": "Categorias",
   "standard": "Padrão",
   "largestToSmallestValue": "Maior para Menor Valor",
@@ -65,5 +65,6 @@
   "thereWasAnErrorCreatingYourCart": "Houve um erro ao criar seu carrinho :(",
   "weWereUnableToCreateYourCart": "Não conseguimos criar seu carrinho :(",
   "weWereUnableToUpdateYourCart": "Não conseguimos atualizar seu carrinho :(",
-  "weWereUnableToAddThisProduct": "Não conseguimos adicionar esse produto :("
+  "weWereUnableToAddThisProduct": "Não conseguimos adicionar esse produto :(",
+  "viewCart": "Visualizar Carrinho"
 }

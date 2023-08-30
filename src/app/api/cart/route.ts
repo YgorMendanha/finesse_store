@@ -75,9 +75,14 @@ export async function PATCH(request: Request) {
       status: 200
     })
   } catch (error: any) {
-    console.log(error)
     if (error?.code === 'P2002') {
       const response = { code: 'P2002', message: error.meta.target }
+      return new Response(JSON.stringify(response), {
+        status: 400
+      })
+    }
+    if (error?.code === 'P2025') {
+      const response = { code: 'P2025', message: error.meta.cause }
       return new Response(JSON.stringify(response), {
         status: 400
       })

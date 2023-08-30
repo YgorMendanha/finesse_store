@@ -7,11 +7,13 @@ import { InputComponent } from '@/components/partials'
 export function InputQty({
   className,
   getValue,
-  value
+  value,
+  disabled = false
 }: {
   className?: string
   getValue?: (e: string | undefined) => void
   value?: number
+  disabled?: boolean
 }) {
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -45,15 +47,16 @@ export function InputQty({
           min: 1,
           ref: inputRef,
           value,
+          disabled,
           onChange: (e) => returnValue(e.target.value)
         }}
         propsComponent={{ className: 'rounded-l-lg rounded-r-none border-indigo-500 border-r-0' }}
       />
       <div className="flex flex-col h-fill border-2 border-l-0 border-indigo-500 rounded-r-lg">
-        <button onClick={plusQty} className="mb-2">
+        <button disabled={disabled} onClick={plusQty} className="mb-2">
           <AiOutlineArrowUp />
         </button>
-        <button onClick={minusQty}>
+        <button disabled={disabled} onClick={minusQty}>
           <AiOutlineArrowDown />
         </button>
       </div>

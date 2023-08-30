@@ -4,14 +4,17 @@ import Image from 'next/image'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { BsTrash } from 'react-icons/bs'
+import { ImSpinner10 } from 'react-icons/im'
 import { ButtonComponent, CustomLink, InputQty } from '@/components/partials'
 import { useCart } from '@/hooks/useCart'
+import { useLoading } from '@/hooks/useLoading'
 import { ProductInterface } from '@/types'
 import { getDictionary } from '@/utils/functions/getDictionary'
 
 export function TableCheckout() {
   const { cart, updateCart } = useCart()
   const router = useRouter()
+  const { cartLoading } = useLoading()
 
   const [dict, setDict] = useState(
     {} as {
@@ -126,7 +129,7 @@ export function TableCheckout() {
                 </p>
 
                 <button onClick={() => deleteProduct(product.id)} className="w-10 text-2xl">
-                  <BsTrash />
+                  {cartLoading ? <ImSpinner10 className="animate-spin" /> : <BsTrash />}
                 </button>
               </div>
             </div>
@@ -136,9 +139,7 @@ export function TableCheckout() {
         <div className="w-full mt-40  flex flex-col">
           <h2 className="m-auto my-5 text-2xl">{dict.youDoNotHaveAnyProductsInTheCart}</h2>
           <CustomLink href={'/shop'}>
-            <ButtonComponent className="mx-auto w-[90%]">
-              {dict.visitStore}
-            </ButtonComponent>
+            <ButtonComponent className="mx-auto w-[90%]">{dict.visitStore}</ButtonComponent>
           </CustomLink>
         </div>
       )}

@@ -30,7 +30,7 @@
   "inCart": "In cart",
   "toAdd": "To add",
   "filters": "Filters",
-  "colors": "Cores",
+  "colors": "Colors",
   "categories": "Categories",
   "standard": "Standard",
   "largestToSmallestValue": "Largest to Smallest Value",
@@ -65,5 +65,6 @@
   "thereWasAnErrorCreatingYourCart": "There was an error creating your cart :(",
   "weWereUnableToCreateYourCart": "We were unable to create your cart :(",
   "weWereUnableToUpdateYourCart": "We were unable to update your cart :(",
-  "weWereUnableToAddThisProduct": "We were unable to add this product :("
+  "weWereUnableToAddThisProduct": "We were unable to add this product :(",
+  "viewCart": "View Cart"
 }

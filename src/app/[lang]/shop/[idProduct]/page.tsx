@@ -61,7 +61,7 @@ export default async function Shop({
       <Breadcrumb
         className="mb-5"
         URLs={[
-          { name: 'Loja', url: '/shop' },
+          { name: lang === 'en' ? 'Shop' : 'Loja', url: '/shop' },
           { name: lang === 'en' ? product.nameEN : product.namePT, url: '#' }
         ]}
       />

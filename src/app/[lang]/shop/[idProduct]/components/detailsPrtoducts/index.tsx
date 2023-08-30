@@ -1,20 +1,39 @@
 'use client'
 
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ButtonComponent, InputQty } from '@/components/partials'
 import { useCart } from '@/hooks/useCart'
+import { useLoading } from '@/hooks/useLoading'
 import { ProductInterface } from '@/types'
 import { formatPrice } from '@/utils/functions/foramatPrice'
 import { getDictionary } from '@/utils/functions/getDictionary'
 
 export function DetailsProducts({ product }: { product: ProductInterface }) {
   const [qty, setQty] = useState<number>(1)
-  const { addToCart } = useCart()
+  const [inCart, setInCart] = useState<boolean>(false)
+  const { addToCart, cart } = useCart()
+  const { cartLoading } = useLoading()
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (cart.products) {
+      cart.products.find((cartProduct) => {
+        if (cartProduct.id === product.id) {
+          setInCart(true)
+          setQty(cartProduct.qty ?? 1)
+        }
+      })
+    } else {
+      setInCart(false)
+    }
+  }, [cart?.products])
 
   const [dict, setDict] = useState(
     {} as {
       addToCart: string
+      viewCart: string
     }
   )
 
@@ -31,6 +50,10 @@ export function DetailsProducts({ product }: { product: ProductInterface }) {
     }
   }
 
+  function goCart() {
+    lang === 'en' ? router.push('/en/cart') : router.push('/cart')
+  }
+
   return (
     <div className="w-auto my-5 lg:m-0 lg:w-6/12 lg:mx-5 h-full">
       <section className="w-full flex flex-col items-start justify-center">
@@ -41,18 +64,21 @@ export function DetailsProducts({ product }: { product: ProductInterface }) {
           {lang === 'en' ? product.categortyEN : product.categortyPT} - #{product.id}
         </p>
         <div className="flex">
-          <InputQty getValue={(e) => setQty(Number(e))} />
+          <InputQty disabled={inCart} value={qty} getValue={(e) => setQty(Number(e))} />
 
           <b className="ml-5 text-3xl flex flex-wrap text-indigo-500">
             <small className="mr-2">{qty > 1 && `${qty} x`}</small>
-            {formatPrice({ currency: 'BRL', language: 'pt-BR', value: product.price * qty })}
+            {lang === 'en'
+              ? formatPrice({ currency: 'USD', language: 'en-US', value: product.price * qty })
+              : formatPrice({ currency: 'BRL', language: 'pt-BR', value: product.price * qty })}
           </b>
         </div>
         <ButtonComponent
-          onClick={() => addToCart({ ...product, qty })}
+          loading={String(cartLoading)}
+          onClick={() => (inCart ? goCart() : addToCart({ ...product, qty }))}
           className="text-xl my-5 shadow-lg"
         >
-          {dict.addToCart}
+          {inCart ? dict.viewCart : dict.addToCart}
         </ButtonComponent>
         <p>{product.description}</p>
       </section>

@@ -20,8 +20,10 @@ export async function GET(request: Request) {
   const id = searchParams.get('id')
   const search = searchParams.get('search')
 
+  
   if (id) {
     const data = await prisma.product.findUnique({ where: { id: Number(id) } })
+    console.log(data)
     if (!data) {
       return new Response(JSON.stringify(data), {
         status: 404
