@@ -72,9 +72,10 @@ export default function RootLayout({
   } else if (params.lang === 'pt') {
     lang = 'pt-BR'
   }
+
   return (
     <html>
-      <body lang={params.lang} className={`${kan.variable} ${dos.variable}`}>
+      <body lang={lang} className={`${kan.variable} ${dos.variable}`}>
         <ContextProvider>
           <Layout lang={params.lang}>{children}</Layout>
         </ContextProvider>
