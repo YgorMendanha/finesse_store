@@ -1,15 +1,15 @@
 'use client'
 
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { ImSpinner10 } from 'react-icons/im'
 import { CustomLink } from '../CustomLink'
 import { useCart } from '@/hooks/useCart'
 import { useFavoriteProducts } from '@/hooks/useFavoriteProducts'
-import { useLoading } from '@/hooks/useLoading'
 import { ProductInterface } from '@/types'
+import { getDictionary } from '@/utils/functions/getDictionary'
 
 export function CardProduct({
   product,
@@ -25,6 +25,26 @@ export function CardProduct({
   const router = useRouter()
   const { addToCart, cart } = useCart()
 
+  const [dict, setDict] = useState(
+    {} as {
+      inCart: string
+      toAdd: string
+    }
+  )
+
+  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+
+  useEffect(() => {
+    selectLang(lang)
+  }, [lang])
+
+  function selectLang(params?: 'pt' | 'en') {
+    if (params) {
+      const dict = getDictionary(params)
+      setDict(dict)
+    }
+  }
+
   const { favoriteProducts, changeFavoriteProducts } = useFavoriteProducts()
 
   useEffect(() => {
@@ -35,7 +55,6 @@ export function CardProduct({
 
   useEffect(() => {
     if (cart.products && cart.products.find((cartProduct) => cartProduct.id === product.id)) {
-      console.log(cart?.products?.find((product) => product.id === product.id))
       setLoading(false)
       setInCart(true)
     } else {
@@ -63,20 +82,24 @@ export function CardProduct({
             fill
             onClick={() => router.push(`/shop/${product.id}`)}
             sizes="(max-width: 640px) 180px, (max-width: 768px) 240px, 300px"
-            alt={`image-${product.id}-${product.name}`}
+            alt={`image-${product.id}-${lang === 'en' ? product.nameEN : product.namePT}`}
             className="border-4 rounded-md cursor-pointer border-indigo-500"
           />
         </div>
 
         <div className="flex w-full flex-col my-2 ">
-          <small>{product.categorty}</small>
+          <small>{lang === 'en' ? product.categortyEN : product.categortyPT}</small>
           <CustomLink href={`/shop/${product.id}`}>
             <h3 className="text-indigo-500 lg:text-xl truncate">
-              <b>{product.name}</b>
+              <b>{lang === 'en' ? product.nameEN : product.namePT}</b>
             </h3>
           </CustomLink>
           <p>
-            <b>{product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
+            <b>
+              {lang === 'en'
+                ? product.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+                : product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+            </b>
           </p>
           <button
             onClick={() => {
@@ -84,7 +107,7 @@ export function CardProduct({
                 addToCart({ ...product, qty: 1 })
                 setLoading(true)
               } else {
-                router.push(`/shop/${cart.id}`)
+                lang === 'en' ? router.push(`/en/shop/${cart.id}`) : router.push(`/shop/${cart.id}`)
               }
             }}
             className={`my-2 bg-gradient-to-b w-full text-indigo-500 font-semibold from-indigo-50 to-indigo-100 px-10 py-3 rounded-2xl shadow-indigo-400 border-b-4 border-indigo-200 transition-[box-shadow] duration-75  ${
@@ -92,10 +115,10 @@ export function CardProduct({
             } `}
           >
             {inCart ? (
-              'No Carrinho'
+              dict.inCart
             ) : (
               <>
-                {loading ? <ImSpinner10 className="animate-spin text-2xl mx-auto" /> : 'Adicionar'}
+                {loading ? <ImSpinner10 className="animate-spin text-2xl mx-auto" /> : dict.toAdd}
               </>
             )}
           </button>

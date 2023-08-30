@@ -9,7 +9,6 @@ import { useUser } from '@/hooks/useUser'
 
 export function UserModalComponent() {
   const { user } = useUser()
-
   const [open, setOpen] = useState<boolean>(false)
   const [editUser, setEditUser] = useState<boolean>(false)
   const [createAccount, setCreateAccount] = useState<boolean>(false)

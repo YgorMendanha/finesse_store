@@ -1,9 +1,11 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
+import { useParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { z } from 'zod'
 import { ButtonComponent, InputComponent, Notification } from '@/components/partials'
+import { getDictionary } from '@/utils/functions/getDictionary'
 
 type Inputs = z.infer<typeof createMessageFormShema>
 
@@ -16,6 +18,30 @@ const createMessageFormShema = z.object({
 export default function Form() {
   const [loading, setLoading] = useState(false)
 
+  const [dict, setDict] = useState(
+    {} as {
+      enterContact: string
+      inputName: string
+      contactNumberEmail: string
+      message: string
+      toSend: string
+      wellBeITouchSoon: string
+    }
+  )
+
+  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+
+  useEffect(() => {
+    selectLang(lang)
+  }, [lang])
+
+  function selectLang(params?: 'pt' | 'en') {
+    if (params) {
+      const dict = getDictionary(params)
+      setDict(dict)
+    }
+  }
+
   const {
     register,
     handleSubmit,
@@ -27,7 +53,7 @@ export default function Form() {
   const onSubmit: SubmitHandler<Inputs> = () => {
     setLoading(true)
     setTimeout(() => {
-      Notification.user({ content: 'Logo Entraremos em Contato', type: 'success' })
+      Notification.user({ content: dict.wellBeITouchSoon, type: 'success' })
       setLoading(false)
     }, 5000)
   }
@@ -35,7 +61,7 @@ export default function Form() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-1/2 mx-5">
       <div className="flex w-full justify-center">
-        <h3 className="text-xl">Entre em Contato</h3>
+        <h3 className="text-xl">{dict.enterContact}</h3>
       </div>
       <InputComponent
         className="my-5"
@@ -44,7 +70,7 @@ export default function Form() {
           ...register('name', { required: true })
         }}
         propsComponent={{
-          label: 'Nome',
+          label: dict.inputName,
           errorMessage: errors.name?.message
         }}
       />
@@ -52,7 +78,7 @@ export default function Form() {
         className="my-5"
         propsInput={{ type: 'text', ...register('contact', { required: true }) }}
         propsComponent={{
-          label: 'Numero/Email de contato',
+          label: dict.contactNumberEmail,
           errorMessage: errors.contact?.message
         }}
       />
@@ -60,12 +86,12 @@ export default function Form() {
         className="my-5"
         propsInput={{ type: 'text', ...register('message', { required: true }) }}
         propsComponent={{
-          label: 'Mensagem',
+          label: dict.message,
           type: 'textarea',
           errorMessage: errors.message?.message
         }}
       />
-      <ButtonComponent loading={loading.toString()}>Enviar</ButtonComponent>
+      <ButtonComponent loading={loading.toString()}>{dict.toSend}</ButtonComponent>
     </form>
   )
 }

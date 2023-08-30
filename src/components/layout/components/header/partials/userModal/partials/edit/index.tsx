@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { AiFillEye, AiFillEyeInvisible, AiOutlineUser } from 'react-icons/ai'
@@ -10,6 +11,7 @@ import { z } from 'zod'
 import { ButtonComponent, InputComponent } from '@/components/partials'
 import { useLoading } from '@/hooks/useLoading'
 import { useUser } from '@/hooks/useUser'
+import { getDictionary } from '@/utils/functions/getDictionary'
 
 const editUserFormShema = z.object({
   name: z.string().nonempty('digite seu nome'),
@@ -27,6 +29,32 @@ export function EditForm({ closeModal }: { closeModal: () => void }) {
 
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [showConfPassword, setShowConfPassword] = useState<boolean>(false)
+
+  const [dict, setDict] = useState(
+    {} as {
+      myAccount: string
+      inputName: string
+      inputEmail: string
+      oldPassword: string
+      newPassword: string
+      telephone: string
+      toSave: string
+      toGoOut: string
+    }
+  )
+
+  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+
+  useEffect(() => {
+    selectLang(lang)
+  }, [lang])
+
+  async function selectLang(params?: 'pt' | 'en') {
+    if (params) {
+      const dict = getDictionary(params)
+      setDict(dict)
+    }
+  }
 
   const {
     register,
@@ -87,14 +115,14 @@ export function EditForm({ closeModal }: { closeModal: () => void }) {
       <button type="button" className="ml-auto" onClick={() => closeModal()}>
         <IoMdClose />
       </button>
-      <b className="mx-auto text-3xl">Minha Conta</b>
+      <b className="mx-auto text-3xl">{dict.myAccount}</b>
       <InputComponent
         className="my-2 w-fill"
         propsInput={{
           ...register('name')
         }}
         propsComponent={{
-          label: 'Nome*',
+          label: dict.inputName,
           icon: <FaUserAlt />,
           errorMessage: errors.name?.message
         }}
@@ -105,7 +133,7 @@ export function EditForm({ closeModal }: { closeModal: () => void }) {
           ...register('email')
         }}
         propsComponent={{
-          label: 'Email',
+          label: dict.inputEmail,
           icon: <MdEmail />,
           errorMessage: errors.email?.message
         }}
@@ -118,7 +146,7 @@ export function EditForm({ closeModal }: { closeModal: () => void }) {
             ...register('oldpassword')
           }}
           propsComponent={{
-            label: 'Antiga Senha',
+            label: dict.oldPassword,
             icon: showPassword ? (
               <AiFillEye onClick={() => setShowPassword(false)} />
             ) : (
@@ -134,7 +162,7 @@ export function EditForm({ closeModal }: { closeModal: () => void }) {
             ...register('newpassword')
           }}
           propsComponent={{
-            label: 'Nova Senha',
+            label: dict.newPassword,
             icon: showConfPassword ? (
               <AiFillEye onClick={() => setShowConfPassword(false)} />
             ) : (
@@ -151,13 +179,13 @@ export function EditForm({ closeModal }: { closeModal: () => void }) {
           onChange: (e) => onChange(e)
         }}
         propsComponent={{
-          label: 'Telefone',
+          label: dict.telephone,
           icon: <BsFillTelephoneFill />,
           errorMessage: errors.cellphone?.message
         }}
       />
       <ButtonComponent type="submit" loading={String(userLoading)} className="mt-2">
-        Salvar
+        {dict.toSave}
       </ButtonComponent>
       <button
         onClick={() => {
@@ -167,7 +195,7 @@ export function EditForm({ closeModal }: { closeModal: () => void }) {
         type="button"
         className={`w-full bg-indigo-500 rounded p-2 mt-2 bg-transparent border text-stone-950 border-black hover:bg-red-500 hover:text-white hover:border-red-500`}
       >
-        Sair
+        {dict.toGoOut}
       </button>
     </form>
   )

@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   title: 'Lista de Desejos'
 }
 
-export default async function Wishlist() {
+export default async function Wishlist({ params: { lang } }: { params: { lang: 'pt' | 'en' } }) {
   const products = await Product.GetAll()
 
   return (
     <>
-      <Banner className="mb-3" title="Loja" />
+      <Banner className="mb-3" title={lang === 'en' ? 'Wishlist' : 'Favoritos'} />
       <section className="min-h-screen flex container">
         <Suspense fallback={<ImSpinner10 className="animate-spin text-2xl m-auto" />}>
           <ProductsGrid favoriteGrid products={products} />

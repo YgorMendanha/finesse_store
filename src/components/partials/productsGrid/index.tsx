@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useSearchParams, useRouter, useParams } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { AiOutlineShopping } from 'react-icons/ai'
@@ -10,6 +10,7 @@ import { CardProduct } from '../cardProduct'
 import { useFavoriteProducts } from '@/hooks/useFavoriteProducts'
 import { Product } from '@/server/products'
 import { ProductInterface } from '@/types'
+import { getDictionary } from '@/utils/functions/getDictionary'
 
 const createFilterFormShema = z.object({
   sort: z.string()
@@ -38,6 +39,28 @@ export function ProductsGrid({
   const sortQuery = searchParams.get('sort')
   const searchQuery = searchParams.get('search')
 
+  const [dict, setDict] = useState(
+    {} as {
+      standard: string
+      largestToSmallestValue: string
+      lowestToHighestValue: string
+      noProducts: string
+    }
+  )
+
+  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+
+  useEffect(() => {
+    selectLang(lang)
+  }, [lang])
+
+  async function selectLang(params?: 'pt' | 'en') {
+    if (params) {
+      const dict = getDictionary(params)
+      setDict(dict)
+    }
+  }
+
   const { register, setValue } = useForm<Inputs>({
     resolver: zodResolver(createFilterFormShema)
   })
@@ -58,23 +81,39 @@ export function ProductsGrid({
     }
   }, [sortQuery])
 
-  useMemo(async () => {
+  useEffect(() => {
+    searchQueryProducts()
+  }, [searchQuery])
+
+  async function searchQueryProducts() {
     if (searchQuery) {
       const searchProducts = await Product.Search(searchQuery)
       setProductsFormated(searchProducts)
     } else {
       setProductsFormated(products)
     }
-  }, [searchQuery])
+  }
 
   // Filter Products
-  useMemo(() => {
+  useEffect(() => {
+    filterProducts()
+  }, [
+    colorsQuery,
+    categoryQuery,
+    minValueQuery,
+    maxValueQuery,
+    sortQuery,
+    favoriteGrid,
+    favoriteProducts
+  ])
+
+  async function filterProducts() {
     let productsFormatedTemp: ProductInterface[] = []
 
     if (colorsQuery) {
       products.map((product) => {
         JSON.parse(colorsQuery).map((color: string) => {
-          if (color === product.color) {
+          if (color === (lang === 'en' ? product.colorEN : product.colorPT)) {
             productsFormatedTemp.push(product)
           }
         })
@@ -86,7 +125,7 @@ export function ProductsGrid({
         const filterProductsFormated: ProductInterface[] = []
         productsFormatedTemp.map((product) => {
           JSON.parse(categoryQuery).map((category: string) => {
-            if (category === product.categorty) {
+            if (category === (lang === 'en' ? product.categortyEN : product.categortyPT)) {
               filterProductsFormated.push(product)
             }
           })
@@ -95,7 +134,7 @@ export function ProductsGrid({
       } else {
         products.map((product) => {
           JSON.parse(categoryQuery).map((category: string) => {
-            if (category === product.categorty) {
+            if (category === (lang === 'en' ? product.categortyEN : product.categortyPT)) {
               productsFormatedTemp.push(product)
             }
           })
@@ -146,15 +185,7 @@ export function ProductsGrid({
         ? setProductsFormated(favoriteProducts)
         : setProductsFormated([...new Set(productsFormatedTemp)])
     }
-  }, [
-    colorsQuery,
-    categoryQuery,
-    minValueQuery,
-    maxValueQuery,
-    sortQuery,
-    favoriteGrid,
-    favoriteProducts
-  ])
+  }
 
   return (
     <div className="w-full flex flex-col ">
@@ -163,9 +194,9 @@ export function ProductsGrid({
         onChange={(e) => router.push('?' + createQueryString('sort', e.target.value))}
         className="ml-auto border-2 text-end appearance-none rounded outline-10 outline-indigo-500 cursor-pointer p-1"
       >
-        <option value="">Padrão</option>
-        <option value="desc">Maior para Menor Valor</option>
-        <option value="asc">Menor para Maior Valor</option>
+        <option value="">{dict.standard}</option>
+        <option value="desc">{dict.largestToSmallestValue}</option>
+        <option value="asc">{dict.lowestToHighestValue}</option>
       </select>
       {productsFormated.length > 0 ? (
         <div className="w-full grid grid-cols-1 sm:grid-cols-3">
@@ -175,7 +206,7 @@ export function ProductsGrid({
         </div>
       ) : (
         <div className="w-full h-full flex items-center justify-center flex-col">
-          <h3 className="text-xl">Sem Produtos </h3>
+          <h3 className="text-xl">{dict.noProducts}</h3>
           <AiOutlineShopping className="text-9xl text-gray-400 " />
         </div>
       )}

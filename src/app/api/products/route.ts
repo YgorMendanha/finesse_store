@@ -35,8 +35,10 @@ export async function GET(request: Request) {
   if (search) {
     const data = await prisma.product.findMany({
       where: {
-        name: { search: search.replace(/ /g, '|') },
-        color: { search: search.replace(/ /g, '|') }
+        namePT: { search: search.replace(/ /g, '|') },
+        colorPT: { search: search.replace(/ /g, '|') },
+        nameEN: { search: search.replace(/ /g, '|') },
+        colorEN: { search: search.replace(/ /g, '|') }
       }
     })
 

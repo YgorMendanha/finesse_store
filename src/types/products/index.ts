@@ -1,8 +1,11 @@
 export interface ProductInterface {
   id: number
-  name: string
-  categorty: string
-  color: string
+  namePT: string
+  categortyPT: string
+  colorPT: string
+  nameEN: string
+  categortyEN: string
+  colorEN: string
   price: number
   ratings: number
   variants: number[]

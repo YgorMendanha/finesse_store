@@ -1,6 +1,7 @@
 'use client'
 
-import { useCallback, useEffect, useReducer } from 'react'
+import { useParams } from 'next/navigation'
+import { useCallback, useEffect, useReducer, useState } from 'react'
 import { createContext } from 'use-context-selector'
 import Reducers from './reducer'
 import { Notification } from '@/components/partials'
@@ -9,6 +10,7 @@ import { Cart } from '@/server/cart'
 import { User } from '@/server/user'
 import { ContextType, ProductInterface, State, UserInterface } from '@/types'
 import { CartInterface } from '@/types/cart'
+import { getDictionary } from '@/utils/functions/getDictionary'
 
 const intialState: State = {
   favoriteProducts: [],
@@ -34,6 +36,36 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
     {} as CartInterface
   )
 
+  //transition
+  const [dict, setDict] = useState(
+    {} as {
+      invalidInformation: string
+      weWereUnableToLogIn: string
+      welcome: string
+      hasAlreadyBeenRegistered: string
+      weCouldntCreateYourUser: string
+      updatedInformation: string
+      weWereUnableToUpdateYourUser: string
+      thereWasAnErrorCreatingYourCart: string
+      weWereUnableToCreateYourCart: string
+      weWereUnableToUpdateYourCart: string
+      weWereUnableToAddThisProduct: string
+    }
+  )
+
+  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+
+  useEffect(() => {
+    selectLang(lang)
+  }, [lang])
+
+  function selectLang(params?: 'pt' | 'en') {
+    if (params) {
+      const dict = getDictionary(params)
+      setDict(dict)
+    }
+  }
+
   // user
   useEffect(() => {
     if (userStorage.id) {
@@ -57,7 +89,7 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
 
         if (!response?.data?.id) {
           if (response.code === '401') {
-            Notification.user({ content: 'Informaçoes invalidas', type: 'error' })
+            Notification.user({ content: dict.invalidInformation, type: 'error' })
           }
           return LoadingChange('user', false)
         }
@@ -74,10 +106,13 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
             payload: response.data
           })
         }
-        Notification.user({ content: `Bem vindo ${response.data.name}`, type: 'success' })
+        Notification.user({
+          content: dict.weWereUnableToLogIn + response.data.name,
+          type: 'success'
+        })
       } catch (error) {
         console.log(error)
-        Notification.user({ content: 'Não conseguimos realizar seu login :(', type: 'info' })
+        Notification.user({ content: dict.weWereUnableToLogIn, type: 'info' })
       }
       LoadingChange('user', false)
     },
@@ -108,7 +143,7 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
             LoadingChange('user', false)
             return response.message.map((input) =>
               Notification.user({
-                content: `Parece que já existe um ${input} cadastrado`,
+                content: input + dict.hasAlreadyBeenRegistered,
                 type: 'error'
               })
             )
@@ -128,7 +163,7 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
           })
         }
       } catch (error) {
-        Notification.user({ content: 'Não conseguimos criar seu usuario :(', type: 'info' })
+        Notification.user({ content: dict.weCouldntCreateYourUser, type: 'info' })
       }
       LoadingChange('user', false)
     },
@@ -155,7 +190,7 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
         })
         if (!response?.data?.id) {
           if (response.code === '401') {
-            Notification.user({ content: 'Informações invalidas', type: 'error' })
+            Notification.user({ content: dict.invalidInformation, type: 'error' })
           }
           return LoadingChange('user', false)
         }
@@ -163,9 +198,9 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
           type: 'USER',
           payload: response.data
         })
-        Notification.user({ content: 'Informações atualizadas', type: 'success' })
+        Notification.user({ content: dict.updatedInformation, type: 'success' })
       } catch (error) {
-        Notification.user({ content: 'Não conseguimos realizar seu login :(', type: 'info' })
+        Notification.user({ content: dict.weWereUnableToUpdateYourUser, type: 'info' })
       }
       LoadingChange('user', false)
     },
@@ -193,7 +228,7 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
       const response = await Cart.Create()
       if (response.code !== '201') {
         Notification.user({
-          content: 'Houve um erro ao criar seu carrinho :(',
+          content: dict.thereWasAnErrorCreatingYourCart,
           type: 'info'
         })
       }
@@ -206,7 +241,7 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
       }
       LoadingChange('cart', false)
     } catch (error) {
-      Notification.user({ content: 'Não conseguimos criar seu carrinho :(', type: 'info' })
+      Notification.user({ content: dict.weWereUnableToCreateYourCart, type: 'info' })
     }
     LoadingChange('cart', false)
   }, [])
@@ -232,7 +267,7 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
         }
         LoadingChange('cart', false)
       } catch (error) {
-        Notification.user({ content: 'Não conseguimos atualizar seu carrinho :(', type: 'info' })
+        Notification.user({ content: dict.weWereUnableToUpdateYourCart, type: 'info' })
       }
       LoadingChange('cart', false)
     },
@@ -258,7 +293,7 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
         LoadingChange('cart', false)
       } catch (error) {
         console.log(error)
-        Notification.user({ content: 'Não conseguimos adicionar esse produto :(', type: 'info' })
+        Notification.user({ content: dict.weWereUnableToAddThisProduct, type: 'info' })
       }
       LoadingChange('cart', false)
     },

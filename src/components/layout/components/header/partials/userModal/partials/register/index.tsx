@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useParams } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
@@ -11,6 +12,7 @@ import { ButtonComponent, InputComponent } from '@/components/partials'
 import { CheckboxComponent } from '@/components/partials/checkbox'
 import { useLoading } from '@/hooks/useLoading'
 import { useUser } from '@/hooks/useUser'
+import { getDictionary } from '@/utils/functions/getDictionary'
 
 const createFilterFormShema = z
   .object({
@@ -40,6 +42,34 @@ export function RegisterForm({
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [showConfPassword, setShowConfPassword] = useState<boolean>(false)
   const [saveLogin, setSaveLogin] = useState<boolean>(false)
+
+  const [dict, setDict] = useState(
+    {} as {
+      record: string
+      inputName: string
+      inputEmail: string
+      password: string
+      confirmPassword: string
+      telephone: string
+      rememberMyLogin: string
+      iForgotMyPassword: string
+      register: string
+      alreadyHaveAnAccount: string
+    }
+  )
+
+  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+
+  useEffect(() => {
+    selectLang(lang)
+  }, [lang])
+
+  async function selectLang(params?: 'pt' | 'en') {
+    if (params) {
+      const dict = getDictionary(params)
+      setDict(dict)
+    }
+  }
 
   const {
     register: registerCreate,
@@ -101,14 +131,14 @@ export function RegisterForm({
       <button type="button" className="ml-auto" onClick={() => closeModal()}>
         <IoMdClose />
       </button>
-      <b className="mx-auto text-3xl">Registro</b>
+      <b className="mx-auto text-3xl">{dict.record}</b>
       <InputComponent
         className="my-2 w-fill"
         propsInput={{
           ...registerCreate('name')
         }}
         propsComponent={{
-          label: 'Nome*',
+          label: dict.inputName,
           icon: <FaUserAlt />,
           errorMessage: errorsCreate.name?.message
         }}
@@ -119,7 +149,7 @@ export function RegisterForm({
           ...registerCreate('email')
         }}
         propsComponent={{
-          label: 'Email*',
+          label: dict.inputEmail,
           icon: <MdEmail />,
           errorMessage: errorsCreate.email?.message
         }}
@@ -132,7 +162,7 @@ export function RegisterForm({
             ...registerCreate('password')
           }}
           propsComponent={{
-            label: 'Senha*',
+            label: dict.password,
             icon: showPassword ? (
               <AiFillEye onClick={() => setShowPassword(false)} />
             ) : (
@@ -148,7 +178,7 @@ export function RegisterForm({
             ...registerCreate('confpassword')
           }}
           propsComponent={{
-            label: 'Conf. Senha*',
+            label: dict.confirmPassword,
             icon: showConfPassword ? (
               <AiFillEye onClick={() => setShowConfPassword(false)} />
             ) : (
@@ -165,14 +195,14 @@ export function RegisterForm({
           onChange: (e) => onChange(e)
         }}
         propsComponent={{
-          label: 'Telefone',
+          label: dict.telephone,
           icon: <BsFillTelephoneFill />,
           errorMessage: errorsCreate.cellphone?.message
         }}
       />
 
       <div className="flex text-sm my-2 justify-between items-center">
-        <CheckboxComponent onClick={(e) => setSaveLogin(e)} label="Lembrar meu Login" />
+        <CheckboxComponent onClick={(e) => setSaveLogin(e)} label={dict.rememberMyLogin} />
         <button
           type="button"
           onClick={() => {
@@ -181,14 +211,14 @@ export function RegisterForm({
             resetCreate()
           }}
         >
-          Lembrei minha senha
+          {dict.iForgotMyPassword}
         </button>
       </div>
       <ButtonComponent loading={String(userLoading)} className="mt-2">
-        Registar
+        {dict.register}
       </ButtonComponent>
       <span onClick={() => changeForm()} className="cursor-pointer text-sm mx-auto mt-4">
-        Já possui conta? Realize o login
+        {dict.alreadyHaveAnAccount}
       </span>
     </form>
   )

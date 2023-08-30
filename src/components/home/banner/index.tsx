@@ -2,10 +2,12 @@
 
 import Image from 'next/image'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
-
-//These are Third party packages for smooth slideshow
 import { Zoom } from 'react-slideshow-image'
 import { useWindowSize } from '@/hooks/useWindowSize'
+import Banner1 from '~/public/images/banner/product-2-1.png'
+import Banner2 from '~/public/images/banner/product-3-1.png'
+import Banner3 from '~/public/images/banner/product-7-2.png'
+import Banner4 from '~/public/images/banner/product-8-1.png'
 
 const zoomInProperties = {
   scale: 1,
@@ -28,12 +30,7 @@ export const BannerHome = () => {
   const { width } = useWindowSize()
 
   //Array of Images
-  const images = [
-    '/images/banner/product-2-1.png',
-    '/images/banner/product-3-1.png',
-    '/images/banner/product-7-2.png',
-    '/images/banner/product-8-1.png'
-  ]
+  const images = [Banner1, Banner2, Banner3, Banner4]
 
   return (
     <div className="w-full">
@@ -43,7 +40,7 @@ export const BannerHome = () => {
         >
           <Image
             className="object-cover"
-            src={'/images/banner/product-2-1.png'}
+            src={Banner1}
             priority
             alt="product-image"
             width={400}

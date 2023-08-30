@@ -7,10 +7,12 @@ import { ProductInterface } from '@/types'
 
 export const ProductsSection = ({
   products,
-  deviceType
+  deviceType,
+  title
 }: {
   products: ProductInterface[]
   deviceType: string
+  title: string
 }) => {
   const responsive = {
     superLargeDesktop: {
@@ -31,12 +33,7 @@ export const ProductsSection = ({
     }
   }
 
-  const CustomRightArrow = ({ onClick, ...rest }: any) => {
-    const {
-      onMove,
-      carouselState: { currentSlide, deviceType }
-    } = rest
-
+  const CustomRightArrow = ({ onClick }: any) => {
     return (
       <IoIosArrowForward
         className="absolute right-0 text-4xl cursor-pointer text-indigo-500"
@@ -45,12 +42,7 @@ export const ProductsSection = ({
     )
   }
 
-  const CustomLeftArrow = ({ onClick, ...rest }: any) => {
-    const {
-      onMove,
-      carouselState: { currentSlide, deviceType }
-    } = rest
-
+  const CustomLeftArrow = ({ onClick }: any) => {
     return (
       <IoIosArrowBack
         className="absolute left-0 text-4xl cursor-pointer text-indigo-500"
@@ -61,7 +53,7 @@ export const ProductsSection = ({
 
   return (
     <div className="w-full mb-10 flex flex-col container">
-      <h2 className="my-7 mx-auto text-2xl md:text-4xl">Produtos Populares</h2>
+      <h2 className="my-7 mx-auto text-2xl md:text-4xl">{title}</h2>
       {products.length > 0 && (
         <Carousel
           className="w-full"

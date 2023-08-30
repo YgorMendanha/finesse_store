@@ -24,6 +24,7 @@ export default function Menu() {
     showBtn && (
       <>
         <button
+          aria-label="button"
           onClick={() => setOpen((state) => !state)}
           className={`group mx-2 flex h-10 w-10 z-40 cursor-pointer items-center justify-center rounded-3xl bg-slate-50 p-2 hover:bg-slate-200
         transition-all duration-1000

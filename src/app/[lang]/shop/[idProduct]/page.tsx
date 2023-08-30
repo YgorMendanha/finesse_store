@@ -6,17 +6,17 @@ import { Breadcrumb } from '@/components/partials/breadCrumb'
 import { Product } from '@/server/products'
 
 export async function generateMetadata({
-  params
+  params: { lang, idProduct }
 }: {
-  params: { idProduct: string }
+  params: { idProduct: string; lang: 'pt' | 'en' }
 }): Promise<Metadata> {
-  const product = await Product.GetById({ idProduct: params.idProduct })
+  const product = await Product.GetById({ idProduct })
 
   return {
-    title: product.name,
+    title: lang === 'en' ? product.nameEN : product.namePT,
     description: product.description,
     openGraph: {
-      title: product.name,
+      title: lang === 'en' ? product.nameEN : product.namePT,
       description: product.description,
       url: 'https://finesse-store.vercel.app/',
       siteName: 'FINESSE',
@@ -37,7 +37,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: product.name,
+      title: lang === 'en' ? product.nameEN : product.namePT,
       description: product.description,
       creator: '@YgorMendanha',
       images: [product.images[0]]
@@ -45,8 +45,12 @@ export async function generateMetadata({
   }
 }
 
-export default async function Shop({ params }: { params: { idProduct: string } }) {
-  const product = await Product.GetById({ idProduct: params.idProduct })
+export default async function Shop({
+  params: { lang, idProduct }
+}: {
+  params: { idProduct: string; lang: 'pt' | 'en' }
+}) {
+  const product = await Product.GetById({ idProduct: idProduct })
 
   if (!product) {
     return redirect('/shop')
@@ -58,7 +62,7 @@ export default async function Shop({ params }: { params: { idProduct: string } }
         className="mb-5"
         URLs={[
           { name: 'Loja', url: '/shop' },
-          { name: product.name, url: '#' }
+          { name: lang === 'en' ? product.nameEN : product.namePT, url: '#' }
         ]}
       />
       <section className="items-start flex flex-col lg:flex-row">

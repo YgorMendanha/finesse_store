@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        geo: ['var(--font-geologica)'],
+        geo: ['var(--font-kanita)'],
         dos: ['var(--font-dosis)']
       }
     }

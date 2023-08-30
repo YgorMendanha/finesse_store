@@ -9,18 +9,20 @@ export const metadata: Metadata = {
   title: 'Loja'
 }
 
-export default async function Shop() {
+export default async function Shop({ params: { lang } }: { params: { lang: 'pt' | 'en' } }) {
   const products = await Product.GetAll()
 
-  const categorys = products.map((product) => product.categorty)
+  const categorys = products.map((product) =>
+    lang === 'en' ? product.categortyEN : product.categortyPT
+  )
   const categoryFormat = [...new Set(categorys)]
 
-  const colors = products.map((product) => product.color)
+  const colors = products.map((product) => (lang === 'en' ? product.colorEN : product.colorPT))
   const colorsFormat = [...new Set(colors)]
 
   return (
     <>
-      <Banner className="mb-3" title="Loja" />
+      <Banner className="mb-3" title={lang === 'en' ? 'Shop' : 'Loja'} />
 
       <section className="min-h-screen flex container">
         <Suspense fallback={<ImSpinner10 className="animate-spin text-2xl m-auto" />}>

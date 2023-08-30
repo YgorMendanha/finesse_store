@@ -6,6 +6,7 @@ import { BannerHome } from '@/components/home/banner'
 import { BannerCategories } from '@/components/home/bannerCategories'
 import { Product } from '@/server/products'
 import ShuffleProducts from '@/utils/functions/ShuffleProducts'
+import { getDictionary } from '@/utils/functions/getDictionary'
 
 function getDeviceType() {
   let userAgent
@@ -28,9 +29,9 @@ export const metadata: Metadata = {
   title: 'Home'
 }
 
-export default async function Home() {
+export default async function Home({ params: { lang } }: { params: { lang: 'pt' | 'en' } }) {
   const products = await Product.GetAll()
-
+  const dict = getDictionary(lang)
   const promotionProduct = ShuffleProducts(products)
 
   const { deviceType } = getDeviceType()
@@ -38,9 +39,13 @@ export default async function Home() {
   return (
     <>
       <BannerHome />
-      <ProductsSection products={promotionProduct} deviceType={deviceType} />
-      <BannerCategories />
-      <ProductsSection products={products} deviceType={deviceType} />
+      <ProductsSection
+        title={dict.popularProducts}
+        products={promotionProduct}
+        deviceType={deviceType}
+      />
+      <BannerCategories lang={lang} />
+      <ProductsSection title={dict.ourProducts} products={products} deviceType={deviceType} />
     </>
   )
 }

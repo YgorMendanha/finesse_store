@@ -1,15 +1,40 @@
 'use client'
 
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { BsTrash } from 'react-icons/bs'
 import { ButtonComponent, CustomLink, InputQty } from '@/components/partials'
 import { useCart } from '@/hooks/useCart'
 import { ProductInterface } from '@/types'
+import { getDictionary } from '@/utils/functions/getDictionary'
 
 export function TableCheckout() {
   const { cart, updateCart } = useCart()
   const router = useRouter()
+
+  const [dict, setDict] = useState(
+    {} as {
+      name: string
+      unitaryValue: string
+      amount: string
+      youDoNotHaveAnyProductsInTheCart: string
+      visitStore: string
+    }
+  )
+
+  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+
+  useEffect(() => {
+    selectLang(lang)
+  }, [lang])
+
+  function selectLang(params?: 'pt' | 'en') {
+    if (params) {
+      const dict = getDictionary(params)
+      setDict(dict)
+    }
+  }
 
   async function changeQty(id: number, qty: number) {
     const newCart = Array.isArray(cart.products)
@@ -45,13 +70,13 @@ export function TableCheckout() {
             <div className="mx-3 w-28 min-w-[112px]"></div>
             <div className="mx-5 w-full grid grid-cols-4 items-center">
               <p>
-                <b className="border-b-2 border-black">Nome</b>
+                <b className="border-b-2 border-black">{dict.name}</b>
               </p>
               <p>
-                <b className="border-b-2 border-black">Valor Uni.</b>
+                <b className="border-b-2 border-black">{dict.unitaryValue}</b>
               </p>
               <p>
-                <b className="border-b-2 border-black">Valor Total</b>
+                <b className="border-b-2 border-black">{dict.amount}</b>
               </p>
             </div>
           </div>
@@ -61,18 +86,23 @@ export function TableCheckout() {
                 <Image
                   src={product.images[0]}
                   fill
-                  onClick={() => router.push(`/shop/${product.id}`)}
+                  onClick={() =>
+                    lang === 'en'
+                      ? router.push(`/en/shop/${cart.id}`)
+                      : router.push(`/shop/${cart.id}`)
+                  }
                   sizes="(max-width: 640px) 180px, (max-width: 768px) 240px, 300px"
-                  alt={`image-${product.id}-${product.name}`}
+                  alt={`image-${product.id}-${lang === 'en' ? product.nameEN : product.namePT}`}
                   className="border-4 rounded-md cursor-pointer border-indigo-500"
                 />
               </picture>
 
               <div className="mx-5  w-full grid grid-cols-4 items-center">
                 <p className="flex flex-col">
-                  <b className="text-lg">{product.name}</b>
-                  <small>{product.categorty}</small>
+                  <b className="text-lg">{lang === 'en' ? product.nameEN : product.namePT}</b>
+                  <small>{lang === 'en' ? product.categortyEN : product.categortyPT}</small>
                 </p>
+
                 <p className="flex items-center">
                   <InputQty
                     value={product.qty}
@@ -86,7 +116,7 @@ export function TableCheckout() {
                   </b>
                 </p>
 
-                <p className="">
+                <p className="ml-5">
                   <b>
                     {(product.price * (product.qty || 1)).toLocaleString('pt-BR', {
                       style: 'currency',
@@ -104,9 +134,11 @@ export function TableCheckout() {
         </>
       ) : (
         <div className="w-full mt-40  flex flex-col">
-          <h2 className="m-auto my-5 text-2xl">Você não possui Produtos no Carrinho </h2>
+          <h2 className="m-auto my-5 text-2xl">{dict.youDoNotHaveAnyProductsInTheCart}</h2>
           <CustomLink href={'/shop'}>
-            <ButtonComponent className="mx-auto w-[90%]">Visitar Loja</ButtonComponent>
+            <ButtonComponent className="mx-auto w-[90%]">
+              {dict.visitStore}
+            </ButtonComponent>
           </CustomLink>
         </div>
       )}

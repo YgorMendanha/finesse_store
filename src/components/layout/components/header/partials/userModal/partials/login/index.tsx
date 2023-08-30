@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useParams } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { AiFillEye, AiFillEyeInvisible, AiOutlineUser } from 'react-icons/ai'
@@ -9,6 +10,7 @@ import { ButtonComponent, InputComponent } from '@/components/partials'
 import { CheckboxComponent } from '@/components/partials/checkbox'
 import { useLoading } from '@/hooks/useLoading'
 import { useUser } from '@/hooks/useUser'
+import { getDictionary } from '@/utils/functions/getDictionary'
 
 const loginFilterFormShema = z.object({
   email: z.string().email('digite um e-mail valido').nonempty('digite um e-mail'),
@@ -29,6 +31,29 @@ export function LoginForm({
 
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [saveLogin, setSaveLogin] = useState<boolean>(false)
+
+  const [dict, setDict] = useState(
+    {} as {
+      toEnter: string
+      password: string
+      rememberMyLogin: string
+      iForgotMyPassword: string
+      dontHaveAccountYet: string
+    }
+  )
+
+  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+
+  useEffect(() => {
+    selectLang(lang)
+  }, [lang])
+
+  async function selectLang(params?: 'pt' | 'en') {
+    if (params) {
+      const dict = getDictionary(params)
+      setDict(dict)
+    }
+  }
 
   const {
     register: registerLogin,
@@ -76,14 +101,14 @@ export function LoginForm({
         <IoMdClose />
       </button>
 
-      <b className="mx-auto text-3xl">Entrar</b>
+      <b className="mx-auto text-3xl">{dict.toEnter}</b>
       <InputComponent
         className="my-2 w-fill"
         propsInput={{
           ...registerLogin('email')
         }}
         propsComponent={{
-          label: 'Email',
+          label: 'E-mail',
           icon: <MdEmail />,
           errorMessage: errorsLogin.email?.message
         }}
@@ -95,7 +120,7 @@ export function LoginForm({
           ...registerLogin('password')
         }}
         propsComponent={{
-          label: 'Senha',
+          label: dict.password,
           icon: showPassword ? (
             <AiFillEye onClick={() => setShowPassword(false)} />
           ) : (
@@ -105,7 +130,7 @@ export function LoginForm({
         }}
       />
       <div className="flex text-sm justify-between items-center">
-        <CheckboxComponent onClick={(e) => setSaveLogin(e)} label="Lembrar meu Login" />
+        <CheckboxComponent onClick={(e) => setSaveLogin(e)} label={dict.rememberMyLogin} />
         <button
           type="button"
           onClick={() => {
@@ -113,14 +138,14 @@ export function LoginForm({
             resetLogin()
           }}
         >
-          Esqueci minha senha
+          {dict.iForgotMyPassword}
         </button>
       </div>
       <ButtonComponent loading={String(userLoading)} type="submit" className="mt-5">
         Login
       </ButtonComponent>
       <span onClick={() => changeForm()} className="cursor-pointer text-sm mx-auto mt-4">
-        Ainda não possui conta? Registre-se
+        {dict.dontHaveAccountYet}
       </span>
     </form>
   )

@@ -1,9 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { ButtonComponent, Notification } from '@/components/partials'
 import { CheckboxComponent } from '@/components/partials/checkbox'
 import { useCart } from '@/hooks/useCart'
+import { getDictionary } from '@/utils/functions/getDictionary'
 
 export function FormChekout() {
   const { cart } = useCart()
@@ -11,10 +13,36 @@ export function FormChekout() {
   const [payment, setPayment] = useState<'boleto' | 'cart'>('cart')
   const [loading, setLoading] = useState<boolean>(false)
 
+  const [dict, setDict] = useState(
+    {} as {
+      value: string
+      discount: string
+      finalValue: string
+      formOfPayment: string
+      creditCard: string
+      ticket: string
+      finalize: string
+      purchaseDone: string
+    }
+  )
+
+  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+
+  useEffect(() => {
+    selectLang(lang)
+  }, [lang])
+
+  function selectLang(params?: 'pt' | 'en') {
+    if (params) {
+      const dict = getDictionary(params)
+      setDict(dict)
+    }
+  }
+
   function fakePurchase() {
     setLoading(true)
     setTimeout(() => {
-      Notification.user({ type: 'success', content: 'Compra Realizada :)' })
+      Notification.user({ type: 'success', content: dict.purchaseDone })
       setLoading(false)
     }, 900)
   }
@@ -26,52 +54,64 @@ export function FormChekout() {
       </h3>
       <div className="w-full flex items-center justify-between">
         <p className="">
-          <b>Valor</b>
+          <b>{dict.value}</b>
         </p>
         <p className="">
           <b>
-            {cart?.products
-              ?.reduce((acc, product) => acc + product.price, 0)
-              .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+            {lang === 'en'
+              ? cart?.products
+                  ?.reduce((acc, product) => acc + product.price, 0)
+                  .toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+              : cart?.products
+                  ?.reduce((acc, product) => acc + product.price, 0)
+                  .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
           </b>
         </p>
       </div>
       <div className="w-full h-[1px] bg-black my-2" />
       <div className="w-full mt-5 flex items-center justify-between">
         <p className="">
-          <b>Desconto</b>
+          <b>{dict.discount}</b>
         </p>
         <p className="">
-          <b>{(0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
+          <b>
+            {lang === 'en'
+              ? (0).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+              : (0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+          </b>
         </p>
       </div>
       <div className="w-full h-[1px] bg-black my-2" />
       <div className="w-full mt-5 flex items-center justify-between">
         <p className="">
-          <b>Valor Final</b>
+          <b>{dict.finalValue}</b>
         </p>
         <p className="">
           <b>
-            {cart?.products
-              ?.reduce((acc, product) => acc + product.price, 0)
-              .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+            {lang === 'en'
+              ? cart?.products
+                  ?.reduce((acc, product) => acc + product.price, 0)
+                  .toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+              : cart?.products
+                  ?.reduce((acc, product) => acc + product.price, 0)
+                  .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
           </b>
         </p>
       </div>
       <div className="w-full h-[1px] bg-black my-2" />
       <div className="mt-5 ">
         <p className="mb-5">
-          <b>Forma de Pagamento</b>
+          <b>{dict.formOfPayment}</b>
         </p>
         <CheckboxComponent
           className="my-2"
-          label="Cartão de Credito"
+          label={dict.creditCard}
           checked={payment === 'cart'}
           onClick={(e) => (e ? setPayment('cart') : setPayment('boleto'))}
         />
         <CheckboxComponent
           className="my-2"
-          label="Boleto"
+          label={dict.ticket}
           checked={payment === 'boleto'}
           onClick={(e) => (e ? setPayment('boleto') : setPayment('cart'))}
         />
@@ -82,7 +122,7 @@ export function FormChekout() {
         loading={String(loading)}
         className="mt-5"
       >
-        Finalizar
+        {dict.finalize}
       </ButtonComponent>
     </div>
   )

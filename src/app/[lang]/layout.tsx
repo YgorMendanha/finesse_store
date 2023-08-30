@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/react'
 import { Metadata } from 'next'
-import { Geologica, Dosis } from 'next/font/google'
+import { Kanit, Dosis } from 'next/font/google'
 import { Layout } from '@/components/layout'
 import { ContextProvider } from '@/context'
 
@@ -9,10 +9,11 @@ import 'react-multi-carousel/lib/styles.css'
 import 'react-slideshow-image/dist/styles.css'
 import 'react-toastify/dist/ReactToastify.css'
 
-const geo = Geologica({
+const kan = Kanit({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-geologica'
+  weight: '500',
+  variable: '--font-kanit'
 })
 
 const dos = Dosis({
@@ -58,12 +59,24 @@ export const metadata: Metadata = {
   }
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+  params
+}: {
+  children: React.ReactNode
+  params: { lang: 'en' | 'pt' }
+}) {
+  let lang: 'pt-BR' | 'en-US' = 'pt-BR'
+  if (params.lang === 'en') {
+    lang = 'en-US'
+  } else if (params.lang === 'pt') {
+    lang = 'pt-BR'
+  }
   return (
     <html>
-      <body className={`${geo.variable} ${dos.variable}`}>
+      <body lang={params.lang} className={`${kan.variable} ${dos.variable}`}>
         <ContextProvider>
-          <Layout>{children}</Layout>
+          <Layout lang={params.lang}>{children}</Layout>
         </ContextProvider>
         <Analytics />
       </body>
