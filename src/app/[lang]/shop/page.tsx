@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'Loja'
 }
 
+export const revalidate = 3600
 export default async function Shop({ params: { lang } }: { params: { lang: 'pt' | 'en' } }) {
   const products = await Product.GetAll()
 

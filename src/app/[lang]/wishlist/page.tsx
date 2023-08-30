@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'Lista de Desejos'
 }
 
+export const revalidate = 3600
 export default async function Wishlist({ params: { lang } }: { params: { lang: 'pt' | 'en' } }) {
   const products = await Product.GetAll()
 

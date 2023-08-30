@@ -10,7 +10,8 @@ export class User {
   }) {
     const reponse: Response = await featchApi('/api/user', {
       method: 'POST',
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      next: { revalidate: 3600 }
     })
     return reponse
   }
@@ -19,7 +20,8 @@ export class User {
     const reponse: Response = await featchApi(
       `/api/user?email=${payload.email}&password=${payload.password}`,
       {
-        method: 'GET'
+        method: 'GET',
+        next: { revalidate: 3600 }
       }
     )
     return reponse
@@ -37,7 +39,8 @@ export class User {
   ) {
     const reponse: Response = await featchApi(`/api/user?id=${id}`, {
       method: 'PATCH',
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      next: { revalidate: 3600 }
     })
     return reponse
   }

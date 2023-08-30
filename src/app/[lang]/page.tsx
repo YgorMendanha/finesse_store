@@ -28,7 +28,7 @@ function getDeviceType() {
 export const metadata: Metadata = {
   title: 'Home'
 }
-
+export const revalidate = 3600
 export default async function Home({ params: { lang } }: { params: { lang: 'pt' | 'en' } }) {
   const products = await Product.GetAll()
   const dict = getDictionary(lang)
