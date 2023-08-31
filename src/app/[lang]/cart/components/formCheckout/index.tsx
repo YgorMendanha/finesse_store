@@ -48,7 +48,7 @@ export function FormChekout() {
   }
 
   return (
-    <div className="w-1/3 flex flex-col px-10">
+    <div className="w-full xl:w-1/3 mb-10 flex flex-col px-0 xl:px-10">
       <h3 className="mx-auto mb-5 border-b-2 border-black">
         <b>Checkout</b>
       </h3>

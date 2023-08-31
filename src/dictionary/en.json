@@ -66,5 +66,7 @@
   "weWereUnableToCreateYourCart": "We were unable to create your cart :(",
   "weWereUnableToUpdateYourCart": "We were unable to update your cart :(",
   "weWereUnableToAddThisProduct": "We were unable to add this product :(",
-  "viewCart": "View Cart"
+  "viewCart": "View Cart",
+  "cart": "Cart",
+  "favorites": "Favorites"
 }

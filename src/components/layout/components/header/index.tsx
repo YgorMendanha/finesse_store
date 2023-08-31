@@ -3,12 +3,14 @@ import { BsBag, BsFillHeartFill } from 'react-icons/bs'
 import { ImSpinner10 } from 'react-icons/im'
 import Menu from './partials/menu'
 import SearchImput from './partials/searchImput'
+import { SelectLang } from './partials/selectLang'
 import { UserModalComponent } from './partials/userModal'
 import { CustomLink } from '@/components/partials'
 import { getDictionary } from '@/utils/functions/getDictionary'
 
 export default async function Header({ lang }: { lang: 'pt' | 'en' }) {
   const dict = getDictionary(lang)
+
   return (
     <header className="w-full border-b-2 bg-slate-50 sticky top-0 z-50 border-indigo-500">
       <div className="container h-20 flex justify-between items-center ">
@@ -39,9 +41,10 @@ export default async function Header({ lang }: { lang: 'pt' | 'en' }) {
             <BsFillHeartFill className="mx-4 hidden md:inline-block" />
           </CustomLink>
           <CustomLink aria-label={dict.viewTheItemsInYourCart} href={'/cart'}>
-            <BsBag className="mx-4" />
+            <BsBag />
           </CustomLink>
           <UserModalComponent />
+          <SelectLang />
         </section>
       </div>
     </header>

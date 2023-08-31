@@ -1,14 +1,44 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useParams } from 'next/navigation'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import SearchImput from '../searchImput'
+import { CustomLink } from '@/components/partials'
 import { useWindowSize } from '@/hooks/useWindowSize'
+import { getDictionary } from '@/utils/functions/getDictionary'
 
 export default function Menu() {
   const [open, setOpen] = useState(false)
   const [showBtn, setShowBtn] = useState(false)
 
   const { width } = useWindowSize()
+
+  const [dict, setDict] = useState(
+    {} as {
+      shop: string
+      cart: string
+      favorites: string
+      myAccount: string
+      contact: string
+    }
+  )
+
+  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+
+  useEffect(() => {
+    selectLang(lang)
+  }, [lang])
+
+  function selectLang(params?: 'pt' | 'en') {
+    if (params) {
+      const dict = getDictionary(params)
+      setDict(dict)
+    }
+  }
+
+  const onClose = useCallback(() => {
+    setOpen(false)
+  }, [])
 
   useMemo(() => {
     if (!width) return
@@ -66,48 +96,53 @@ export default function Menu() {
               initial="show"
               duration="75"
               className={`${!open && 'invisible'}`}
+              onClose={onClose}
             />
             <p
               className={`transition-all duration-300 text-transparent ${
                 open ? 'text-white' : 'invisible'
               }`}
             >
-              Home
+              <CustomLink onClick={() => setOpen(false)} href={'/'}>
+                Home
+              </CustomLink>
             </p>
             <p
               className={`transition-all duration-300 text-transparent ${
                 open ? 'text-white' : 'invisible'
               }`}
             >
-              Loja
+              <CustomLink onClick={() => setOpen(false)} href={'/shop'}>
+                {dict.shop}
+              </CustomLink>
             </p>
             <p
               className={`transition-all duration-300 text-transparent ${
                 open ? 'text-white' : 'invisible'
               }`}
             >
-              Carrinho
+              <CustomLink onClick={() => setOpen(false)} href={'/cart'}>
+                {dict.cart}
+              </CustomLink>
             </p>
             <p
               className={`transition-all duration-300 text-transparent ${
                 open ? 'text-white' : 'invisible'
               }`}
             >
-              Favoritos
+              <CustomLink onClick={() => setOpen(false)} href={'/wishlist'}>
+                {dict.favorites}
+              </CustomLink>
             </p>
+
             <p
               className={`transition-all duration-300 text-transparent ${
                 open ? 'text-white' : 'invisible'
               }`}
             >
-              Minha conta
-            </p>
-            <p
-              className={`transition-all duration-300 text-transparent ${
-                open ? 'text-white' : 'invisible'
-              }`}
-            >
-              Contato
+              <CustomLink onClick={() => setOpen(false)} href={'/contact'}>
+                {dict.contact}
+              </CustomLink>
             </p>
           </section>
         </div>

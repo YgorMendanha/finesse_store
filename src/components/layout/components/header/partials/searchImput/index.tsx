@@ -18,12 +18,14 @@ export default function SearchImput({
   className = '',
   initial = 'hide',
   btnDisabled = false,
-  duration = '700'
+  duration = '700',
+  onClose
 }: {
   className?: string
   initial?: 'show' | 'hide'
   btnDisabled?: boolean
   duration?: string
+  onClose?: () => void
 }) {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -34,8 +36,10 @@ export default function SearchImput({
 
   const { lang }: { lang?: 'pt' | 'en' } = useParams()
 
-  const onSubmit = (data: Inputs) =>
+  const onSubmit = (data: Inputs) => {
     router.push(`${lang === 'en' ? '/en/' : '/'}shop?` + createQueryString('search', data.search))
+    onClose && onClose()
+  }
 
   const createQueryString = useCallback(
     (name: string, value: string) => {

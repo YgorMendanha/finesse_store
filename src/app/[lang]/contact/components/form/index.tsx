@@ -59,7 +59,7 @@ export default function Form() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-1/2 mx-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="lg:w-1/2 mx-5">
       <div className="flex w-full justify-center">
         <h3 className="text-xl">{dict.enterContact}</h3>
       </div>
