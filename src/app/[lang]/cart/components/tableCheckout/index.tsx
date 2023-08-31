@@ -93,8 +93,8 @@ export function TableCheckout() {
                       fill
                       onClick={() =>
                         lang === 'en'
-                          ? router.push(`/en/shop/${cart.id}`)
-                          : router.push(`/shop/${cart.id}`)
+                          ? router.push(`/en/shop/${product.id}`)
+                          : router.push(`/shop/${product.id}`)
                       }
                       sizes="(max-width: 640px) 180px, (max-width: 768px) 240px, 300px"
                       alt={`image-${product.id}-${lang === 'en' ? product.nameEN : product.namePT}`}
@@ -148,8 +148,8 @@ export function TableCheckout() {
                     fill
                     onClick={() =>
                       lang === 'en'
-                        ? router.push(`/en/shop/${cart.id}`)
-                        : router.push(`/shop/${cart.id}`)
+                        ? router.push(`/en/shop/${product.id}`)
+                        : router.push(`/shop/${product.id}`)
                     }
                     sizes="(max-width: 640px) 180px, (max-width: 768px) 240px, 300px"
                     alt={`image-${product.id}-${lang === 'en' ? product.nameEN : product.namePT}`}
