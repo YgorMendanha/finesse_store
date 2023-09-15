@@ -82,12 +82,12 @@ export default function Menu() {
         />
 
         <div
-          className={`max-w-[500px] w-full h-full fixed top-0 ransition-all duration-700  ${
+          className={`max-w-[500px] w-full h-full fixed top-0 transition-all duration-700  ${
             open ? 'z-30 bg-neutral-900 left-0 ' : '-left-20 invisible'
           } `}
         >
           <section
-            className={`m-auto mt-2 w-[95%] p-5 pt-[70px] rounded-xl ransition-all duration-500  ${
+            className={`m-auto mt-2 w-[95%] p-5 pt-[70px] rounded-xl transition-all duration-500  ${
               open ? 'z-400 bg-indigo-500 left-0' : '-left-20'
             }`}
           >
