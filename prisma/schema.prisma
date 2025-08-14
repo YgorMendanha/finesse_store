@@ -1,50 +1,59 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Product {
   id          Int      @id @default(autoincrement())
   namePT      String
-  categortyPT String
+  categoryPT  String
   colorPT     String
   nameEN      String
-  categortyEN String
+  categoryEN  String
   colorEN     String
-  price       Float
+  price       Decimal  @db.Decimal(10, 2)
   ratings     Float
   description String
   stock       Int
-  images      String[]
-  variants    Int[]
+  images      String[] // URLs das imagens
+  variants    Int[] // IDs ou códigos das variantes
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("product")
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String
-  email     String @unique
+  email     String   @unique
   cellphone String
   password  String
-  Cart      Cart[]
+  cart      Cart[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("user")
 }
 
 model Cart {
-  id       Int   @id @default(autoincrement())
-  user     User? @relation(fields: [userId], references: [id])
-  products Json?
-  userId   Int?
+  id        Int      @id @default(autoincrement())
+  user      User?    @relation(fields: [userId], references: [id])
+  products  Json? // Lista de produtos e quantidades
+  userId    Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("cart")
 }

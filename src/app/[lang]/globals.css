@@ -1,11 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-body {
-  margin: 0;
-  padding: 0;
+html,
+body,
+:root {
+  height: 100%;
+  scroll-behavior: smooth;
+  background-color: #fad102;
 }
+
+@theme {
+  --color-black-purple: #19092e;
+  --color-purple: #5e1dad;
+  --color-blueLight: #42a0ed;
+  --color-blue: #267cc1;
+  --font-rob: "var(--font-rob)";
+}
+
 .container {
   padding: 0px 20px;
   margin-left: auto;

@@ -77,14 +77,7 @@ export function CardProduct({
               className="text-3xl z-10 absolute cursor-pointer top-3 text-indigo-500 ml-2"
             />
           )}
-          <Image
-            src={product.images[0]}
-            fill
-            onClick={() => router.push(`${lang === 'en' ? '/en/' : '/'}shop/${product.id}`)}
-            sizes="(max-width: 640px) 180px, (max-width: 768px) 240px, 300px"
-            alt={`image-${product.id}-${lang === 'en' ? product.nameEN : product.namePT}`}
-            className="border-4 rounded-md cursor-pointer border-indigo-500"
-          />
+          
         </div>
 
         <div className="flex w-full flex-col my-2 ">

@@ -1,62 +1,41 @@
-import { headers } from 'next/headers'
-import prisma from '../../../../prisma/client'
+import { NextResponse } from 'next/server'
+import prisma from '~/prisma/client'
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
+  const auth = request.headers.get('Authentication')
 
-  const headersList = headers()
-  const athentication = headersList.get('Authentication')
-
-  if (
-    !athentication ||
-    Buffer.from(athentication?.split(' ')[1]!, 'base64').toString('utf8') !==
-      process.env.NEXT_PUBLIC_TOKEN
-  ) {
-    return new Response('unauthorized', {
-      status: 401
-    })
-  }
+  if (!auth) return new NextResponse('unauthorized', { status: 401 })
+  const token = Buffer.from((auth.split(' ')[1] ?? ''), 'base64').toString('utf8')
+  if (token !== process.env.NEXT_PUBLIC_TOKEN) return new NextResponse('unauthorized', { status: 401 })
 
   const id = searchParams.get('id')
   const search = searchParams.get('search')
 
-  
   if (id) {
-    const data = await prisma.product.findUnique({ where: { id: Number(id) } })
-    console.log(data)
-    if (!data) {
-      return new Response(JSON.stringify(data), {
-        status: 404
-      })
-    }
-    return new Response(JSON.stringify(data), {
-      status: 200
-    })
+    const idNum = Number(id)
+    if (Number.isNaN(idNum)) return NextResponse.json(null, { status: 400 })
+    const data = await prisma.product.findUnique({ where: { id: idNum } })
+    if (!data) return NextResponse.json(null, { status: 404 })
+    return NextResponse.json(data)
   }
 
   if (search) {
+    const q = search.trim()
     const data = await prisma.product.findMany({
       where: {
-        namePT: { search: search.replace(/ /g, '|') },
-        colorPT: { search: search.replace(/ /g, '|') },
-        nameEN: { search: search.replace(/ /g, '|') },
-        colorEN: { search: search.replace(/ /g, '|') }
+        OR: [
+          { namePT: { contains: q, mode: 'insensitive' } },
+          { colorPT: { contains: q, mode: 'insensitive' } },
+          { nameEN: { contains: q, mode: 'insensitive' } },
+          { colorEN: { contains: q, mode: 'insensitive' } }
+        ]
       }
     })
-
-    if (!data) {
-      return new Response(JSON.stringify(data), {
-        status: 404
-      })
-    }
-    return new Response(JSON.stringify(data), {
-      status: 200
-    })
+    if (!data || data.length === 0) return NextResponse.json([], { status: 404 })
+    return NextResponse.json(data)
   }
 
   const data = await prisma.product.findMany()
-
-  return new Response(JSON.stringify(data), {
-    status: 200
-  })
+  return NextResponse.json(data)
 }
