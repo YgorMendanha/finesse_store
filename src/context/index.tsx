@@ -178,7 +178,9 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
             payload: response.data,
           });
         }
-      } catch (error) {
+      } catch (e) {
+        console.error(e);
+
         Notification.user({
           content: dict.weCouldntCreateYourUser,
           type: "info",
@@ -224,7 +226,8 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
           content: dict.updatedInformation,
           type: "success",
         });
-      } catch (error) {
+      } catch (e) {
+        console.error(e);
         Notification.user({
           content: dict.weWereUnableToUpdateYourUser,
           type: "info",
@@ -268,7 +271,8 @@ export function ContextProvider({ children }: { children: JSX.Element }) {
         });
       }
       LoadingChange("cart", false);
-    } catch (error) {
+    } catch (e) {
+      console.error(e);
       Notification.user({
         content: dict.weWereUnableToCreateYourCart,
         type: "info",

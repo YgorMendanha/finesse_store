@@ -1,159 +1,166 @@
-'use client'
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useParams, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { BsTrash2Fill } from 'react-icons/bs'
-import { z } from 'zod'
-import { CheckboxComponent } from '../checkbox'
-import { InputComponent } from '../input'
-import { getDictionary } from '@/utils/functions/getDictionary'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { BsTrash2Fill } from "react-icons/bs";
+import { z } from "zod";
+import { CheckboxComponent } from "../checkbox";
+import { InputComponent } from "../input";
+import { getDictionary } from "@/utils/functions/getDictionary";
 
 const createFilterFormShema = z.object({
   minValue: z.string(),
-  maxValue: z.string()
-})
+  maxValue: z.string(),
+});
 
-type Inputs = z.infer<typeof createFilterFormShema>
+type Inputs = z.infer<typeof createFilterFormShema>;
 
 export function FilterProductsComponent({
   categorys,
   colors,
-  className = ''
+  className = "",
 }: {
-  categorys: Array<string>
-  colors: Array<string>
-  className?: string
+  categorys: Array<string>;
+  colors: Array<string>;
+  className?: string;
 }) {
-  const router = useRouter()
-  const searchParams = useSearchParams()
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const minValue = searchParams.get('minValue')
-  const maxValue = searchParams.get('maxValue')
-  const colorsQuery = searchParams.get('color') || '[]'
-  const categoryQuery = searchParams.get('category') || '[]'
+  const minValue = searchParams.get("minValue");
+  const maxValue = searchParams.get("maxValue");
+  const colorsQuery = searchParams.get("color") || "[]";
+  const categoryQuery = searchParams.get("category") || "[]";
 
   const [dict, setDict] = useState(
     {} as {
-      filters: string
-      colors: string
-      categories: string
+      filters: string;
+      colors: string;
+      categories: string;
     }
-  )
+  );
 
-  const { lang }: { lang?: 'pt' | 'en' } = useParams()
+  const { lang }: { lang?: "pt" | "en" } = useParams();
 
   useEffect(() => {
-    selectLang(lang)
-  }, [lang])
+    selectLang(lang);
+  }, [lang]);
 
-  async function selectLang(params?: 'pt' | 'en') {
+  async function selectLang(params?: "pt" | "en") {
     if (params) {
-      const dict = getDictionary(params)
-      setDict(dict)
+      const dict = getDictionary(params);
+      setDict(dict);
     }
   }
 
   useEffect(() => {
     if (minValue) {
       setValue(
-        'minValue',
-        `${lang === 'en' ? '$' : 'R$'} ${minValue
-          .replace(/\D/g, '')
-          .replace(/(\d{1,2})$/, ',$1')
-          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}`
-      )
+        "minValue",
+        `${lang === "en" ? "$" : "R$"} ${minValue
+          .replace(/\D/g, "")
+          .replace(/(\d{1,2})$/, ",$1")
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}`
+      );
     } else {
-      setValue('minValue', `${lang === 'en' ? '$' : 'R$'} `)
+      setValue("minValue", `${lang === "en" ? "$" : "R$"} `);
     }
     if (maxValue) {
       setValue(
-        'maxValue',
-        `${lang === 'en' ? '$' : 'R$'} ${maxValue
-          .replace(/\D/g, '')
-          .replace(/(\d{1,2})$/, ',$1')
-          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}`
-      )
+        "maxValue",
+        `${lang === "en" ? "$" : "R$"} ${maxValue
+          .replace(/\D/g, "")
+          .replace(/(\d{1,2})$/, ",$1")
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}`
+      );
     } else {
-      setValue('maxValue', `${lang === 'en' ? '$' : 'R$'} `)
+      setValue("maxValue", `${lang === "en" ? "$" : "R$"} `);
     }
-  }, [minValue, maxValue])
+  }, [minValue, maxValue]);
 
   const { register, setValue } = useForm<Inputs>({
-    resolver: zodResolver(createFilterFormShema)
-  })
+    resolver: zodResolver(createFilterFormShema),
+  });
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (e.target.name === 'minValue') {
+  const onChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    if (e.target.name === "minValue") {
       const value = e.target.value
-        ?.replace(/\D/g, '')
-        .replace(/(\d{1,2})$/, ',$1')
-        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+        ?.replace(/\D/g, "")
+        .replace(/(\d{1,2})$/, ",$1")
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
       if (value.length > 3) {
-        router.push('?' + createQueryString('minValue', value.replace(/\D/g, '')))
+        router.push(
+          "?" + createQueryString("minValue", value.replace(/\D/g, ""))
+        );
       }
-      setValue('minValue', `${lang === 'en' ? '$' : 'R$'} ${value}`)
+      setValue("minValue", `${lang === "en" ? "$" : "R$"} ${value}`);
     }
-    if (e.target.name === 'maxValue') {
+    if (e.target.name === "maxValue") {
       const value = e.target.value
-        ?.replace(/\D/g, '')
-        .replace(/(\d{1,2})$/, ',$1')
-        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+        ?.replace(/\D/g, "")
+        .replace(/(\d{1,2})$/, ",$1")
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
       if (value.length > 3) {
-        router.push('?' + createQueryString('maxValue', value.replace(/\D/g, '')))
+        router.push(
+          "?" + createQueryString("maxValue", value.replace(/\D/g, ""))
+        );
       }
-      setValue('maxValue', `${lang === 'en' ? '$' : 'R$'} ${value}`)
+      setValue("maxValue", `${lang === "en" ? "$" : "R$"} ${value}`);
     }
-  }
+  };
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      // @ts-ignore Url Error
-      const params = new URLSearchParams(searchParams)
-      params.set(name, value)
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
 
-      return params.toString()
+      return params.toString();
     },
     [searchParams]
-  )
+  );
 
   const queryString = (state: boolean, name: string, value: string) => {
-    const query = searchParams.get(name)
+    const query = searchParams.get(name);
 
     if (state) {
       if (query) {
-        const newQuery: String[] = JSON.parse(query)
-        newQuery.push(value)
-        router.push('?' + createQueryString(name, JSON.stringify(newQuery)))
+        const newQuery: string[] = JSON.parse(query);
+        newQuery.push(value);
+        router.push("?" + createQueryString(name, JSON.stringify(newQuery)));
       } else {
-        router.push('?' + createQueryString(name, JSON.stringify([value])))
+        router.push("?" + createQueryString(name, JSON.stringify([value])));
       }
     } else {
       if (query) {
-        const oldQuery: String[] = JSON.parse(query)
+        const oldQuery: string[] = JSON.parse(query);
         if (oldQuery.length === 1) {
-          router.push('?' + createQueryString(name, ''))
-          return
+          router.push("?" + createQueryString(name, ""));
+          return;
         }
-        const newQuery: String[] = []
+        const newQuery: string[] = [];
         oldQuery.map((oldQuery) => {
           if (oldQuery !== value) {
-            return newQuery.push(oldQuery)
+            return newQuery.push(oldQuery);
           }
-        })
-        router.push('?' + createQueryString(name, JSON.stringify([...new Set(newQuery)])))
+        });
+        router.push(
+          "?" + createQueryString(name, JSON.stringify([...new Set(newQuery)]))
+        );
       }
     }
-    return
-  }
+    return;
+  };
 
   return (
     <form className={`max-w-[250px]  ${className} `}>
       <div className="flex justify-between">
         <h3 className="text-xl">{dict.filters}</h3>
         <BsTrash2Fill
-          onClick={() => router.push(`${lang === 'en' ? '/en/' : '/'}shop`)}
+          onClick={() => router.push(`${lang === "en" ? "/en/" : "/"}shop`)}
           className="text-indigo-500 text-xl cursor-pointer "
         />
       </div>
@@ -162,17 +169,17 @@ export function FilterProductsComponent({
         <div className="flex">
           <InputComponent
             propsInput={{
-              ...register('minValue'),
-              onChange: (e) => onChange(e)
+              ...register("minValue"),
+              onChange: (e) => onChange(e),
             }}
-            propsComponent={{ className: 'mx-3', label: 'Min' }}
+            propsComponent={{ className: "mx-3", label: "Min" }}
           />
           <InputComponent
             propsInput={{
-              ...register('maxValue'),
-              onChange: (e) => onChange(e)
+              ...register("maxValue"),
+              onChange: (e) => onChange(e),
             }}
-            propsComponent={{ className: 'mx-3', label: 'Max' }}
+            propsComponent={{ className: "mx-3", label: "Max" }}
           />
         </div>
       </section>
@@ -182,7 +189,7 @@ export function FilterProductsComponent({
         {colors.map((color, idx) => (
           <CheckboxComponent
             checked={JSON.parse(colorsQuery).find((c: string) => c === color)}
-            onClick={(e) => queryString(e, 'color', color)}
+            onClick={(e) => queryString(e, "color", color)}
             className="pl-5 my-4"
             key={idx}
             name="color"
@@ -194,8 +201,10 @@ export function FilterProductsComponent({
         <p>{dict.categories}: </p>
         {categorys.map((category, idx) => (
           <CheckboxComponent
-            checked={JSON.parse(categoryQuery).find((c: string) => c === category)}
-            onClick={(e) => queryString(e, 'category', category)}
+            checked={JSON.parse(categoryQuery).find(
+              (c: string) => c === category
+            )}
+            onClick={(e) => queryString(e, "category", category)}
             className="pl-5 my-4"
             key={idx}
             name="category"
@@ -204,5 +213,5 @@ export function FilterProductsComponent({
         ))}
       </section>
     </form>
-  )
+  );
 }
